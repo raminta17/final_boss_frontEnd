@@ -1,38 +1,119 @@
-.App {
-  text-align: center;
+:root {
+    --boxShadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    --color: #565454;
+    --transition: 0.3s ease-in-out;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding: 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.startPage {
+    height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.nav {
+    height: 10vh;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navUserLogo {
+    width: 10vw;
+    height: 100%;
+    border-bottom: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navUserLogo img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.navLinks {
+    text-decoration: none;
+    width: 10vw;
+    height: 100%;
+    border-bottom: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.navLinks:hover {
+    border-bottom: 2px solid var(--color);
+}
+
+.active {
+    border-bottom: 2px solid var(--color);
+}
+
+.f1 {
+    flex: 1;
+}
+
+.box {
+    box-shadow: var(--boxShadow);
+    padding: 20px;
+    min-width: 60vw;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profileBox {
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.profileImgDiv {
+    max-width: 400px;
+}
+
+.profileImgDiv img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.allUsersPage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: start;
+    align-items: start;
+    padding: 40px;
+}
+
+.singleUser {
+    flex:1;
+}
+
+.singleUser .navUserLogo {
+    width: 100%;
+    justify-content: start;
+    gap: 10px;
 }
