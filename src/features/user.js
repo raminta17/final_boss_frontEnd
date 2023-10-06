@@ -4,7 +4,10 @@ export const userSlice = createSlice({
     name: 'player',
     initialState: {
         loggedInUser: null,
-        allUsers: []
+        allUsers: [],
+        allPosts: [],
+        openPost: null,
+        activePostSort: null
     },
     reducers: {
         updateLoggedInUser: (state, action) => {
@@ -15,12 +18,28 @@ export const userSlice = createSlice({
         },
         updateAllUsers: (state,action) => {
             state.allUsers = action.payload;
+        },
+        updateAllPosts: (state,action) => {
+            state.allPosts = action.payload;
+        },
+        addNewPost: (state,action) => {
+            state.allPosts.push(action.payload);
+        },
+        updateOpenPost: (state, action) => {
+            state.openPost = action.payload;
+        },
+        updateActivePostSort: (state, action) => {
+            state.activePostSort = action.payload;
         }
     }
 })
 
 export const {updateLoggedInUser,
     updateImg,
-    updateAllUsers} = userSlice.actions;
+    updateAllUsers,
+    updateAllPosts,
+    addNewPost,
+    updateOpenPost,
+    updateActivePostSort} = userSlice.actions;
 
 export default userSlice.reducer;

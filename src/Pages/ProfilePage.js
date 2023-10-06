@@ -23,22 +23,21 @@ const ProfilePage = () => {
             dispatch(updateLoggedInUser());
             nav('/');
         } else {
-            const options = {
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    authorization: localStorage.getItem('TOKEN')
-                }
-            }
-            fetch('http://localhost:8000/getUserInfo', options)
-                .then(res => res.json()).then(data => {
-                dispatch(updateLoggedInUser(data.data))
-            })
+            // const options = {
+            //     method: 'GET',
+            //     headers: {
+            //         'content-type': 'application/json',
+            //         authorization: localStorage.getItem('TOKEN')
+            //     }
+            // }
+            // fetch('http://localhost:8000/getUserInfo', options)
+            //     .then(res => res.json()).then(data => {
+            //     dispatch(updateLoggedInUser(data.data))
+            // })
         }
     }, []);
 
     async function updateProfileImg() {
-        console.log(imgRef.current.value)
         const options = {
             method: 'POST',
             headers: {
@@ -59,9 +58,6 @@ const ProfilePage = () => {
 
     async function changePassword(e) {
         e.preventDefault();
-        console.log(oldPassRef.current.value)
-        console.log(newPassRef.current.value)
-        console.log(repeatNewPassRef.current.value)
         if (!oldPassRef.current.value) return setError('password cannot be empty');
         if (!newPassRef.current.value) return setError('password cannot be empty');
         if (newPassRef.current.value.length < 4 || newPassRef.current.value.length > 20) return setError('Password should be between 4 and 20 characters long.');

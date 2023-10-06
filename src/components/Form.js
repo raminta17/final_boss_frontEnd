@@ -42,7 +42,6 @@ const Form = ({page}) => {
         try {
             const res = await fetch('http://localhost:8000/register', options);
             const data = await res.json();
-            console.log('data', data);
             setError(data.message);
             if (!data.error) {
                 usernameRef.current.value = '';
@@ -75,7 +74,6 @@ const Form = ({page}) => {
         try {
             const res = await fetch('http://localhost:8000/login', options);
             const data = await res.json();
-            console.log(data);
             setError(data.message);
             if (!data.error) {
                 localStorage.setItem('TOKEN', data.data.token);
@@ -84,11 +82,10 @@ const Form = ({page}) => {
                 passRef.current.value = '';
                 setError();
                 nav('/profile');
-                // socket.auth = {
-                //     token: localStorage.getItem('TOKEN')
-                // }
-                // socket.connect();
-                socket.emit('userConnected');
+                socket.auth = {
+                    token: localStorage.getItem('TOKEN')
+                }
+                socket.connect();
             }
         } catch (e) {
             console.log('error', e)
@@ -108,8 +105,7 @@ const Form = ({page}) => {
                 <input type="text" ref={passRef} defaultValue="Labas" placeholder="Your password"/>
                 {page === 'Register' &&
                     <>
-                        <input type="text" ref={repeatPassRef} placeholder="Repeat password"/>
-
+                        <input type="text" ref={repeatPassRef} defaultValue="Labas" placeholder="Repeat password"/>
                     </>
                 }
                 {page === 'Login' ?
