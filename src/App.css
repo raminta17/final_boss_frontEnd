@@ -1,6 +1,8 @@
 :root {
     --boxShadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    --color: #565454;
+    --darkColor: #222831;
+    --greyColor: #393E46;
+    --lightColor: #EEEEEE;
     --transition: 0.3s ease-in-out;
 }
 
@@ -8,21 +10,76 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: var(--color);
+    color: var(--darkColor);
 }
 
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #222831;
+    background-color: var(--lightColor);
+    /*background: -webkit-linear-gradient(45deg, #3F72AF, var(--lightColor));*/
+}
+.f1 {
+    flex: 1;
+}
+.f2 {
+    flex: 2;
+}
+.f3 {
+    flex: 3;
+}
 .page {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 90vh;
     padding: 40px;
+    flex-wrap: wrap;
+    gap: 40px;
 }
-
+input[type='text'], input[type='password'],button {
+    border: 2px solid var(--lightColor);
+    padding: 7px 30px;
+    transition: var(--transition);
+    box-shadow: var(--boxShadow);
+}
+button {
+    background-color: var(--greyColor);
+    color: var(--lightColor);
+    border: 2px solid  var(--greyColor);
+}
+input[type='checkbox'] {
+    max-width: 20px;
+}
+input:hover  {
+    background-color: var(--lightColor);
+    border: 2px solid  var(--lightColor);
+}
+button:hover {
+    background-color: var(--lightColor);
+    color: var(--darkColor);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, var(--greyColor) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+input:focus {
+    border: 2px solid var(--greyColor);
+    outline: none;
+}
+::placeholder {
+    color: #c9c6c6;
+    text-align: center;
+}
 .startPage {
     height: 100vh;
 }
-
+header h2, header h1 {
+    font-size: 5vw;
+}
+header h2 {
+    font-weight: 900;
+    background: -webkit-linear-gradient(45deg, #DBE2EF, #3F72AF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 .nav {
     height: 10vh;
     display: flex;
@@ -30,15 +87,22 @@
     align-items: center;
     padding: 0 20px;
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--lightColor);
+    z-index: 1;
 }
-
 .navUserLogo {
     width: 10vw;
     height: 100%;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--lightColor);
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: var(--darkColor)
 }
 
 .navUserLogo img {
@@ -47,28 +111,21 @@
     border-radius: 50%;
     margin: 10px;
 }
-
+.navUserLogo:hover {
+  color: #3F72AF;
+}
 .navLinks {
     text-decoration: none;
     width: 10vw;
     height: 100%;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--lightColor);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: var(--transition);
 }
-
-.navLinks:hover {
-    border-bottom: 2px solid var(--color);
-}
-
-.active {
-    border-bottom: 2px solid var(--color);
-}
-
-.f1 {
-    flex: 1;
+.navLinks:hover, .active {
+    border-bottom: 2px solid var(--darkColor);
 }
 
 .box {
@@ -81,18 +138,35 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    background-color: var(--lightColor);
+    /*color: #F9F7F7;*/
+}
+
+.form {
+    padding: 40px;
+    gap: 20px;
+}
+.form input {
+    width: 100%;
+}
+.formSpan {
+    font-style: italic;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.formSpan:hover {
+    text-decoration: underline;
 }
 .profileBox {
     flex-direction: row;
     justify-content: space-around;
-
 }
 
 .profileImgDiv {
     max-width: 400px;
 }
 
-.profileImgDiv img, .postImage img, .modalImage img{
+.profileImgDiv img, .postImage img, .modalImage img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -104,17 +178,19 @@
     gap: 20px;
     justify-content: start;
     align-items: start;
-    padding: 40px;
+    padding: 15vh 20px 20px 20px;
 }
 
 .singleUser {
-    flex:1;
+    flex: 1;
 }
+
 .singleUser .navUserLogo {
     width: 100%;
     justify-content: start;
     gap: 10px;
 }
+
 .myModal {
     display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -125,8 +201,8 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 .modal-content {
@@ -137,42 +213,117 @@
     width: 60%;
     height: 50%;
 }
+
 .sortBtn, .createPostBtn {
-    flex:1;
+    flex: 1;
     border: 1px solid grey;
     cursor: pointer;
     text-align: center;
     display: flex;
     justify-content: center;
 }
+
 .sortBtn div {
-    flex:1;
+    flex: 1;
 }
+
 .allPosts {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
+
 .singlePost {
     cursor: pointer;
     transition: var(--transition);
 }
+
 .singlePost:hover {
     transform: scale(105%);
 }
+
 .postImage {
     width: 250px;
     height: 300px;
 }
-.postModal .modal-content{
+
+.postModal .modal-content {
     height: 90%;
     width: 80%;
 }
+
 .modalImage {
-  max-width: 400px;
-  max-height: 400px;
+    max-width: 400px;
+    max-height: 400px;
 }
+
 .sortInactive {
     background-color: #cecccc;
     opacity: 0.4;
+}
+
+.chat {
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+    width: 100%;
+    /*background-color: #565454;*/
+    border-radius: 5px;
+
+}
+
+.chatBox {
+    overflow: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.messageBox {
+    padding: 5px;
+    margin: 5px;
+    text-align: left;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+.messageBox > div {
+    display: flex;
+    gap: 5px;
+}
+
+.message {
+    word-break: break-all;
+}
+
+.date {
+    font-size: small;
+    font-style: italic;
+}
+
+
+@media (min-width: 768px) {
+
 }

@@ -14,7 +14,6 @@ const ProfilePage = () => {
     const dispatch = useDispatch();
     const loggedInUser = useSelector(state => state.user.loggedInUser);
     const passRegex = /(?=.*[A-Z])/;
-
     const [display, setDisplay] = useState('none');
     const [error, setError] = useState();
 
@@ -22,18 +21,6 @@ const ProfilePage = () => {
         if (!localStorage.getItem('TOKEN')) {
             dispatch(updateLoggedInUser());
             nav('/');
-        } else {
-            // const options = {
-            //     method: 'GET',
-            //     headers: {
-            //         'content-type': 'application/json',
-            //         authorization: localStorage.getItem('TOKEN')
-            //     }
-            // }
-            // fetch('http://localhost:8000/getUserInfo', options)
-            //     .then(res => res.json()).then(data => {
-            //     dispatch(updateLoggedInUser(data.data))
-            // })
         }
     }, []);
 
@@ -99,20 +86,20 @@ const ProfilePage = () => {
         <>
             <NavBar/>
             {loggedInUser &&
-                <div className="page">
-                    <div className="box profileBox">
-                        <div className="d-flex flex-column align-items-center
-                        gap-2 f1">
+                <div className="page contentPage ">
+                    <div className="box profileBox align-items-start flex-wrap">
+                        <div className="d-flex flex-column align-items-center gap-2 f1">
                             <div className="profileImgDiv">
                                 <img src={loggedInUser.profileImg} alt=""/>
                             </div>
-                            <div>
+
+                        </div>
+                        <div className="d-flex flex-column f1 gap-4">
+                            <h3>{loggedInUser.username} Profile Page</h3>
+                            <div className="d-flex flex-column">
                                 <input type="text" ref={imgRef} placeholder="Your new profile picture url"/>
                                 <button onClick={updateProfileImg}>Update</button>
                             </div>
-                        </div>
-                        <div className="d-flex flex-column f1">
-                            <div>{loggedInUser.username}</div>
                             {display === 'none' ?
                                 <button onClick={() => setDisplay('flex')}>Change Password</button>
                                 :

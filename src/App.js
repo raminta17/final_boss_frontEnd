@@ -1,8 +1,7 @@
 import './App.css';
 import {io} from 'socket.io-client';
 import {Routes, Route} from "react-router-dom";
-import LoginPage from "./Pages/LoginPage";
-import RegisterPage from "./Pages/RegistrationPage";
+import StartPage from "./Pages/StartPage";
 import ProfilePage from "./Pages/ProfilePage";
 import MessagesPage from "./Pages/MessagesPage";
 import PostsPage from "./Pages/PostsPage";
@@ -10,7 +9,16 @@ import AllUsersPage from "./Pages/AllUsersPage";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useRef} from "react";
-import {addNewPost, updateAllPosts, updateAllUsers, updateLoggedInUser, updateOpenPost} from "./features/user";
+import {
+    addNewConversation,
+    addNewPost,
+    updateAllPosts,
+    updateAllUsers,
+    updateLoggedInUser,
+    updateOpenConversation,
+    updateOpenPost,
+    addNewMessage
+} from "./features/user";
 
 export const socket = io('http://localhost:8000', {
     autoConnect: false
@@ -20,19 +28,24 @@ function App() {
 
     const dispatch = useDispatch();
     let activePostSort = useSelector(state=>state.user.activePostSort)
-    let loggedInUser = useSelector(state=>state.user.loggedInUser)
+    let loggedInUser = useSelector(state=>state.user.loggedInUser);
+    let openConversation = useSelector(state=>state.user.openConversation);
     console.log('activeSorting from redux', activePostSort)
     const activePostSortRef = useRef(activePostSort);
     const loggedInUserRef = useRef(loggedInUser);
+    const openConversationRef = useRef(openConversation);
 
 
-    // Update the ref whenever activePostSort in redux changes so I could see the change inside socket.on
+    // Update the ref whenever value in redux changes so I could see the change inside socket.on
     useEffect(() => {
         activePostSortRef.current = activePostSort;
     }, [activePostSort]);
     useEffect(() => {
         loggedInUserRef.current = loggedInUser;
     }, [loggedInUser]);
+    useEffect(() => {
+        openConversationRef.current = openConversation;
+    }, [openConversation]);
 
     useEffect(() => {
         if((localStorage.getItem('TOKEN'))){
@@ -98,8 +111,22 @@ function App() {
         })
         socket.on('sendingAllUsers', data => {
             const currentLoggedInUser = loggedInUserRef.current;
-            const allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
+            let allUsersExceptSelf = [];
+            if(currentLoggedInUser)  allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
             dispatch(updateAllUsers(allUsersExceptSelf));
+        })
+        socket.on('sending new conversation', (conversation, msg) => {
+            dispatch(addNewConversation(conversation));
+            console.log('conversation', conversation)
+            console.log('msg', msg)
+        })
+        socket.on('new message in existing conversation', (conversationId, msg) => {
+            const currentOpenConversation = openConversationRef.current;
+            if(currentOpenConversation && currentOpenConversation._id === conversationId) dispatch(addNewMessage(msg));
+        })
+        socket.on('sendingSelectedConversation', conversation => {
+            console.log(conversation);
+            dispatch(updateOpenConversation(conversation))
         })
     }, []);
 
@@ -118,8 +145,7 @@ function App() {
   return (
     <div>
         <Routes>
-            <Route path="/" element={<LoginPage/>}/>
-            <Route path="/register" element={<RegisterPage/>}/>
+            <Route path="/" element={<StartPage/>}/>
             <Route path="/profile" element={<ProfilePage/>}/>
             <Route path="/messages" element={<MessagesPage/>}/>
             <Route path="/posts" element={<PostsPage/>}/>

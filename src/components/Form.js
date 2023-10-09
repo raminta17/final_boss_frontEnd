@@ -6,7 +6,7 @@ import {updateLoggedInUser} from "../features/user";
 import {Link} from "react-router-dom";
 import {socket} from "../App";
 
-const Form = ({page}) => {
+const Form = () => {
 
     const usernameRef = useRef();
     const passRef = useRef();
@@ -15,8 +15,8 @@ const Form = ({page}) => {
     const [error, setError] = useState();
     const nav = useNavigate();
     const dispatch = useDispatch();
-
     const passRegex = /(?=.*[A-Z])/;
+    const [page,setPage] = useState('Login');
 
     async function register(e) {
         e.preventDefault();
@@ -48,7 +48,8 @@ const Form = ({page}) => {
                 passRef.current.value = '';
                 repeatPassRef.current.value = '';
                 setError();
-                nav('/');
+                // nav('/');
+                setPage('Login');
             }
         } catch (e) {
             console.log('error', e)
@@ -81,7 +82,7 @@ const Form = ({page}) => {
                 usernameRef.current.value = '';
                 passRef.current.value = '';
                 setError();
-                nav('/profile');
+                nav('/posts');
                 socket.auth = {
                     token: localStorage.getItem('TOKEN')
                 }
@@ -98,26 +99,26 @@ const Form = ({page}) => {
 
     return (
 
-            <form  className="box" onSubmit={page === 'Register' ? register : login}>
+            <form  className="box form f1" onSubmit={page === 'Register' ? register : login}>
                 <h1>{page}</h1>
-                {error && <div className="error">{error}</div>}
+                <div className="error">{error}</div>
                 <input type="text" ref={usernameRef} defaultValue="User" placeholder="Your username"/>
-                <input type="text" ref={passRef} defaultValue="Labas" placeholder="Your password"/>
+                <input type="password" ref={passRef} defaultValue="Labas" placeholder="Your password"/>
                 {page === 'Register' &&
                     <>
-                        <input type="text" ref={repeatPassRef} defaultValue="Labas" placeholder="Repeat password"/>
+                        <input type="password" ref={repeatPassRef} defaultValue="Labas" placeholder="Repeat password"/>
                     </>
                 }
                 {page === 'Login' ?
                     <>
-                        <div>
-                            <label htmlFor="auto">Stay logged in? </label>
+                        <div className="d-flex w-100 justify-content-center gap-2">
+                            <label htmlFor="auto">Stay connected? </label>
                             <input onChange={handleAutoSave} id="auto" type="checkbox" ref={autoSaveRef}/>
                         </div>
-                        <div>Do not have an account? <Link to="/register">Register</Link></div>
+                        <div>Do not have an account? <span className="formSpan" onClick={()=> setPage('Register')}>Register</span></div>
                     </>
                 :
-                    <div>Already have an account? <Link to="/">Login</Link></div>
+                    <div>Already have an account? <span className="formSpan" onClick={()=> setPage('Login')}>Login</span></div>
                 }
                 <button>{page}</button>
             </form>

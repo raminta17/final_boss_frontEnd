@@ -16,7 +16,7 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
 
     function sendMessage() {
         if (!messageRef.current.value) return setError('Your message cannot be empty.')
-        socket.emit('sendingMessage', messageRef.current.value, user._id);
+        socket.emit('sendingMessage', messageRef.current.value, user.username);
         setError('Message sent successfully.');
         messageRef.current.value = '';
     }

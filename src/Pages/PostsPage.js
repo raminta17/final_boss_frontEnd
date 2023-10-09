@@ -11,7 +11,6 @@ const PostsPage = () => {
     const dispatch = useDispatch();
     const [display, setDisplay] = useState('none');
     let allPosts = useSelector(state=>state.user.allPosts);
-
     const [sortMostComments, setSortMostComments] = useState(false);
     const [sortMostLikes, setSortMostLikes] = useState(false);
     const [sortOldest, setSortOldest] = useState(false);

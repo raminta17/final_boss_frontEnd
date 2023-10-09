@@ -7,7 +7,9 @@ export const userSlice = createSlice({
         allUsers: [],
         allPosts: [],
         openPost: null,
-        activePostSort: null
+        activePostSort: null,
+        allConversations: [],
+        openConversation: null
     },
     reducers: {
         updateLoggedInUser: (state, action) => {
@@ -30,6 +32,18 @@ export const userSlice = createSlice({
         },
         updateActivePostSort: (state, action) => {
             state.activePostSort = action.payload;
+        },
+        updateAllConversations: (state, action) => {
+            state.allConversations = action.payload;
+        },
+        addNewConversation: (state, action) => {
+            state.allConversations.push(action.payload);
+        },
+        updateOpenConversation: (state, action) => {
+            state.openConversation = action.payload;
+        },
+        addNewMessage: (state, action) => {
+            state.openConversation.messages.push(action.payload);
         }
     }
 })
@@ -40,6 +54,10 @@ export const {updateLoggedInUser,
     updateAllPosts,
     addNewPost,
     updateOpenPost,
-    updateActivePostSort} = userSlice.actions;
+    updateActivePostSort,
+updateAllConversations,
+    addNewConversation,
+    updateOpenConversation,
+    addNewMessage} = userSlice.actions;
 
 export default userSlice.reducer;

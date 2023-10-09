@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {socket} from "../App";
 const NavBar = () => {
@@ -16,12 +16,11 @@ const NavBar = () => {
 
     return (
         <div className="nav">
-            {loggedInUser && <div className="navUserLogo">
+            {loggedInUser && <Link to="/profile" className="navUserLogo">
                 <img src={loggedInUser.profileImg} alt=""/>
                 {loggedInUser.username}
-            </div>}
+            </Link>}
             <div className="d-flex gap-4 h-100">
-                <NavLink className="navLinks" to="/profile"><div>PROFILE</div></NavLink>
                 <NavLink className="navLinks" to="/messages"><div>MESSAGES</div></NavLink>
                 <NavLink className="navLinks" to="/posts"><div>POSTS</div></NavLink>
                 <NavLink className="navLinks" to="/allUsers"><div>USERS</div></NavLink>
