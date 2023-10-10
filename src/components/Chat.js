@@ -1,24 +1,17 @@
 import React, {useEffect, useRef} from 'react';
 import {socket} from "../App";
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {updateUsername} from "../features/user";
+import {useSelector} from "react-redux";
 import SingleMessage from "./SingleMessage";
 
 const Chat = () => {
 
-    const dispatch = useDispatch();
     const messageRef = useRef();
     const chatRef = useRef();
     const conversation = useSelector(state => state.user.openConversation);
     const loggedInUser = useSelector(state => state.user.loggedInUser);
     const [error, setError] = useState();
 
-    // useEffect(() => {
-    //     socket.on('message', data => {
-    //         setMessages(messages=>[...messages,data])
-    //     })
-    // }, []);
     const scrollToBottom = () => {
         chatRef.current?.scrollIntoView({behavior: "smooth"})
     }

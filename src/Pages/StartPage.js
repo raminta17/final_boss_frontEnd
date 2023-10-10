@@ -1,8 +1,15 @@
 import React, {useEffect} from 'react';
 import Form from "../components/Form";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const StartPage = () => {
 
+    const nav = useNavigate();
+
+    useEffect(()=> {
+        if((localStorage.getItem('TOKEN'))) nav('/posts')
+    },[])
 
     return (
         <div className="page startPage">

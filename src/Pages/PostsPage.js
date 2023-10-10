@@ -5,15 +5,18 @@ import {updateLoggedInUser, updateAllPosts, updateActivePostSort} from "../featu
 import NavBar from "../components/NavBar";
 import Message_newPost_Modal from "../components/Message_newPost_Modal";
 import SinglePost from "../components/SinglePost";
+import SingleUser from "../components/SingleUser";
 
 const PostsPage = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const [display, setDisplay] = useState('none');
     let allPosts = useSelector(state=>state.user.allPosts);
+    const allUsers = useSelector(state=>state.user.allUsers);
     const [sortMostComments, setSortMostComments] = useState(false);
     const [sortMostLikes, setSortMostLikes] = useState(false);
     const [sortOldest, setSortOldest] = useState(false);
+    const selectedSort = useSelector(state=>state.user.activePostSort);
 
     useEffect(() => {
         if(!localStorage.getItem('TOKEN')) {
@@ -63,29 +66,36 @@ const PostsPage = () => {
     return (
         <>
             <NavBar/>
-            <div className="contentPage flex-column">
-                <div className="d-flex justify-content-between w-100 gap-4 align-items-center">
-                    <div>SORT BY:</div>
-                    <div className="sortBtn" onClick={handleCommentSort}>
-                        <div className={sortMostComments ? 'sortInactive' : ''}>MOST COMMENTS</div>
-                        <div className={sortMostComments ? '' : 'sortInactive'}>LEAST COMMENTS</div>
+            <div className="contentPage">
+                <div className="postsCont">
+                    <div className="sortCont">
+                        <div>SORT BY:</div>
+                        <div className="sortBtn" onClick={handleCommentSort}>
+                            <div className={selectedSort==='mostComments' ? 'selectedSort' : sortMostComments ? 'sortInactive' : ''} >MOST COMMENTS</div>
+                            <div className={selectedSort==='leastComments' ? 'selectedSort' : sortMostComments ? '' : 'sortInactive'}>LEAST COMMENTS</div>
+                        </div>
+                        <div className="sortBtn" onClick={handleLikesSort}>
+                            <div  className={selectedSort==='mostLikes' ? 'selectedSort' : sortMostLikes ? 'sortInactive' : ''}>MOST LIKES</div>
+                            <div  className={selectedSort==='leastLikes' ? 'selectedSort' : sortMostLikes ? '' : 'sortInactive'}>LEAST LIKES</div>
+                        </div>
+                        <div className="sortBtn" onClick={handleTimeSort}>
+                            <div  className={selectedSort==='oldest' ? 'selectedSort' : sortOldest ? 'sortInactive' : ''}>OLDEST</div>
+                            <div  className={selectedSort==='newest' ? 'selectedSort' : sortOldest ? '' : 'sortInactive'}>NEWEST</div>
+                        </div>
+                        <div className="createPostBtn" onClick={()=> setDisplay('block')}>CREATE NEW POST</div>
                     </div>
-                    <div className="sortBtn" onClick={handleLikesSort}>
-                        <div  className={sortMostLikes ? 'sortInactive' : ''}>MOST LIKES</div>
-                        <div  className={sortMostLikes ? '' : 'sortInactive'}>LEAST LIKES</div>
-                    </div>
-                    <div className="sortBtn" onClick={handleTimeSort}>
-                        <div  className={sortOldest ? 'sortInactive' : ''}>OLDEST</div>
-                        <div  className={sortOldest ? '' : 'sortInactive'}>NEWEST</div>
-                    </div>
-                    <div className="createPostBtn" onClick={()=> setDisplay('block')}>CREATE NEW POST</div>
-                </div>
 
-                {allPosts.length> 0 && <div className="allPosts">
-                    {allPosts.map(post =>
-                        <SinglePost key={post._id} post={post}/>
+                    {allPosts.length> 0 && <div className="allPosts">
+                        {allPosts.map(post =>
+                            <SinglePost key={post._id} post={post}/>
+                        )}
+                    </div>}
+                </div>
+                <div className=" usersSideBar">
+                    {allUsers.map(user =>
+                        <SingleUser key={user._id} user={user}/>
                     )}
-                </div>}
+                </div>
                 <Message_newPost_Modal type={'post'} setDisplay={setDisplay} display={display}/>
             </div>
         </>

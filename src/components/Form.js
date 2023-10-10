@@ -16,16 +16,16 @@ const Form = () => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const passRegex = /(?=.*[A-Z])/;
-    const [page,setPage] = useState('Login');
+    const [page, setPage] = useState('Login');
 
     async function register(e) {
         e.preventDefault();
-        if (!usernameRef.current.value) return setError('Username cannot be empty')
-        if (usernameRef.current.value.length <4 || usernameRef.current.value.length >20) return setError('Username should be between 4 and 20 characters long.')
-        if (!passRef.current.value) return setError('Password cannot be empty');
-        if (passRef.current.value.length <4 || passRef.current.value.length >20) return setError('Password should be between 4 and 20 characters long.');
-        if(!passRegex.test(passRef.current.value)) return setError('Password should have at least one upper case letter.');
-        if (passRef.current.value !== repeatPassRef.current.value) return setError('Passwords should match');
+        if (!usernameRef.current.value) return setError('Note: username cannot be empty')
+        if (usernameRef.current.value.length < 4 || usernameRef.current.value.length > 20) return setError('Note: username should be between 4 and 20 characters long.')
+        if (!passRef.current.value) return setError('Note: password cannot be empty');
+        if (passRef.current.value.length < 4 || passRef.current.value.length > 20) return setError('Note: password should be between 4 and 20 characters long.');
+        if (!passRegex.test(passRef.current.value)) return setError('Note: password should have at least one upper case letter.');
+        if (passRef.current.value !== repeatPassRef.current.value) return setError('Note: passwords should match');
         const user = {
             username: usernameRef.current.value,
             pass1: passRef.current.value,
@@ -59,8 +59,8 @@ const Form = () => {
     async function login(e) {
         e.preventDefault();
         localStorage.setItem('auto-login', autoSaveRef.current.checked);
-        if (!usernameRef.current.value) return setError('username cannot be empty');
-        if (!passRef.current.value) return setError('password cannot be empty');
+        if (!usernameRef.current.value) return setError('Note: username cannot be empty');
+        if (!passRef.current.value) return setError('Note: password cannot be empty');
         const user = {
             username: usernameRef.current.value,
             password: passRef.current.value,
@@ -98,8 +98,8 @@ const Form = () => {
     }
 
     return (
-
-            <form  className="box form f1" onSubmit={page === 'Register' ? register : login}>
+        <div className="f1">
+            <form className="box form" onSubmit={page === 'Register' ? register : login}>
                 <h1>{page}</h1>
                 <div className="error">{error}</div>
                 <input type="text" ref={usernameRef} defaultValue="User" placeholder="Your username"/>
@@ -115,13 +115,17 @@ const Form = () => {
                             <label htmlFor="auto">Stay connected? </label>
                             <input onChange={handleAutoSave} id="auto" type="checkbox" ref={autoSaveRef}/>
                         </div>
-                        <div>Do not have an account? <span className="formSpan" onClick={()=> setPage('Register')}>Register</span></div>
+                        <div>Do not have an account? <span className="formSpan"
+                                                           onClick={() => setPage('Register')}>Register</span></div>
                     </>
-                :
-                    <div>Already have an account? <span className="formSpan" onClick={()=> setPage('Login')}>Login</span></div>
+                    :
+                    <div>Already have an account? <span className="formSpan"
+                                                        onClick={() => setPage('Login')}>Login</span></div>
                 }
                 <button>{page}</button>
             </form>
+        </div>
+
     );
 };
 

@@ -23,7 +23,6 @@ const MessagesPage = () => {
         if(loggedInUser)
         fetch('http://localhost:8000/getAllConversations/'+ loggedInUser.username)
             .then(res => res.json()).then(data => {
-            console.log('all conversation from back end fetch', data);
             dispatch(updateAllConversations(data.data));
         })
     }, [loggedInUser]);
@@ -31,7 +30,7 @@ const MessagesPage = () => {
     return (
         <>
             <NavBar/>
-            <div className="page">
+            <div className="contentPage">
                 <div className="f1 h-100 d-flex flex-column justify-content-start gap-2 overflow-auto p-2">
                     {loggedInUser && allConversations.length > 0 && allConversations.map(conversation =>
                         <SingleUser

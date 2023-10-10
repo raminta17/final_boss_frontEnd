@@ -30,7 +30,6 @@ function App() {
     let activePostSort = useSelector(state=>state.user.activePostSort)
     let loggedInUser = useSelector(state=>state.user.loggedInUser);
     let openConversation = useSelector(state=>state.user.openConversation);
-    console.log('activeSorting from redux', activePostSort)
     const activePostSortRef = useRef(activePostSort);
     const loggedInUserRef = useRef(loggedInUser);
     const openConversationRef = useRef(openConversation);

@@ -12,17 +12,16 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
     const imageRef = useRef();
     const [error, setError] = useState();
     const loggedInUser = useSelector(state=>state.user.loggedInUser);
-    console.log('loggedInUser', loggedInUser);
 
     function sendMessage() {
-        if (!messageRef.current.value) return setError('Your message cannot be empty.')
+        if (!messageRef.current.value) return setError('Note: your message cannot be empty.')
         socket.emit('sendingMessage', messageRef.current.value, user.username);
         setError('Message sent successfully.');
         messageRef.current.value = '';
     }
     function createNewPost() {
-        if (!titleRef.current.value) return setError('You have to give title to your post.')
-        if (!imageRef.current.value) return setError('You have to add an image to your post.')
+        if (!titleRef.current.value) return setError('Note: you have to give title to your post.')
+        if (!imageRef.current.value) return setError('Note : you have to add an image to your post.')
         const newPost = {
             authorId: loggedInUser._id,
             title: titleRef.current.value,
@@ -33,29 +32,33 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
         titleRef.current.value = '';
         imageRef.current.value = '';
     }
+    function closeModal() {
+        setDisplay('none');
+        setError();
+    }
 
 
     return (
         <div className="myModal messageModal" style={{display: display}}>
             <div className="modal-content">
-                <div className="text-end" onClick={() => setDisplay('none')}>
+                <div className="text-end" onClick={closeModal}>
                     <i className="fa-regular fa-circle-xmark"></i>
                 </div>
                 {user && type === 'message' ?
-                    <div>
-                        <div>PRIVATE MESSAGE TO {user.username}</div>
-                        <input type="text" ref={messageRef} placeholder="message"/>
+                    <div className="text-center d-flex flex-column gap-4">
+                        <div>SEND A PRIVATE MESSAGE TO {user.username}</div>
+                        <textarea rows="4" ref={messageRef} placeholder="message"/>
                         <button onClick={sendMessage}>SEND</button>
                     </div>
                     :
-                    <div>
+                    <div className="text-center d-flex flex-column gap-4">
                         <div>CREATE NEW POST</div>
                         <input type="text" ref={titleRef} placeholder="post title"/>
                         <input type="text" ref={imageRef} placeholder="post image url"/>
                         <button onClick={createNewPost}>CREATE</button>
                     </div>
                 }
-                <div>{error}</div>
+                <div className="error">{error}</div>
             </div>
         </div>
     );

@@ -25,6 +25,7 @@ const ProfilePage = () => {
     }, []);
 
     async function updateProfileImg() {
+        if(!imgRef.current.value) return setError('Note: you have to provide new photo url.')
         const options = {
             method: 'POST',
             headers: {
@@ -36,20 +37,21 @@ const ProfilePage = () => {
         try {
             const res = await fetch('http://localhost:8000/updateImg', options);
             const data = await res.json();
-            console.log(data);
             dispatch(updateImg(data.data));
         } catch (e) {
             console.log('error fetching front end', e)
         }
+        imgRef.current.value = "";
+        setError();
     }
 
     async function changePassword(e) {
         e.preventDefault();
-        if (!oldPassRef.current.value) return setError('password cannot be empty');
-        if (!newPassRef.current.value) return setError('password cannot be empty');
-        if (newPassRef.current.value.length < 4 || newPassRef.current.value.length > 20) return setError('Password should be between 4 and 20 characters long.');
-        if (!passRegex.test(newPassRef.current.value)) return setError('Password should have at least one upper case letter.');
-        if (newPassRef.current.value !== repeatNewPassRef.current.value) return setError('Passwords should match');
+        if (!oldPassRef.current.value) return setError('Note: password cannot be empty');
+        if (!newPassRef.current.value) return setError('Note: password cannot be empty');
+        if (newPassRef.current.value.length < 4 || newPassRef.current.value.length > 20) return setError('Note: password should be between 4 and 20 characters long.');
+        if (!passRegex.test(newPassRef.current.value)) return setError('Note: password should have at least one upper case letter.');
+        if (newPassRef.current.value !== repeatNewPassRef.current.value) return setError('Note: passwords should match');
         const passChangeObj = {
             oldPass: oldPassRef.current.value,
             newPass: newPassRef.current.value,
@@ -66,7 +68,6 @@ const ProfilePage = () => {
         try {
             const res = await fetch('http://localhost:8000/changePassword', options);
             const data = await res.json();
-            console.log(data);
             setError(data.message);
             if (!data.error) {
                 oldPassRef.current.value = '';
@@ -86,30 +87,29 @@ const ProfilePage = () => {
         <>
             <NavBar/>
             {loggedInUser &&
-                <div className="page contentPage ">
-                    <div className="box profileBox align-items-start flex-wrap">
-                        <div className="d-flex flex-column align-items-center gap-2 f1">
+                <div className="contentPage">
+                    <div className="box profileBox flex-wrap">
+                        <div className="d-flex flex-column gap-2 f1">
                             <div className="profileImgDiv">
                                 <img src={loggedInUser.profileImg} alt=""/>
                             </div>
-
+                            <h3>{loggedInUser.username}</h3>
                         </div>
-                        <div className="d-flex flex-column f1 gap-4">
-                            <h3>{loggedInUser.username} Profile Page</h3>
-                            <div className="d-flex flex-column">
+                        <div className="d-flex flex-column f1 gap-4 w-100">
+                            <div className="d-flex flex-column gap-4">
                                 <input type="text" ref={imgRef} placeholder="Your new profile picture url"/>
-                                <button onClick={updateProfileImg}>Update</button>
+                                <button onClick={updateProfileImg}>Update photo</button>
                             </div>
                             {display === 'none' ?
                                 <button onClick={() => setDisplay('flex')}>Change Password</button>
                                 :
-                                <form onSubmit={changePassword} style={{display: display}} className="flex-column">
-                                    <div>{error}</div>
-                                    <input type="text" ref={oldPassRef} placeholder="old password"/>
-                                    <input type="text" ref={newPassRef} placeholder="new password"/>
-                                    <input type="text" ref={repeatNewPassRef} placeholder="repeat new password"/>
-                                    <button>change password</button>
+                                <form onSubmit={changePassword} style={{display: display}} className="flex-column gap-2">
+                                    <input type="password" ref={oldPassRef} placeholder="old password"/>
+                                    <input type="password" ref={newPassRef} placeholder="new password"/>
+                                    <input type="password" ref={repeatNewPassRef} placeholder="repeat new password"/>
+                                    <button>Change password</button>
                                 </form>}
+                            <div className="error">{error}</div>
                         </div>
                     </div>
                 </div>

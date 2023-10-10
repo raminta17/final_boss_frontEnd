@@ -10,24 +10,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: var(--darkColor);
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
-    color: #222831;
     background-color: var(--lightColor);
+    color: var(--darkColor);
     /*background: -webkit-linear-gradient(45deg, #3F72AF, var(--lightColor));*/
 }
+
 .f1 {
     flex: 1;
 }
+
 .f2 {
     flex: 2;
 }
+
 .f3 {
     flex: 3;
 }
+
 .page {
     display: flex;
     align-items: center;
@@ -37,51 +40,66 @@ body {
     flex-wrap: wrap;
     gap: 40px;
 }
-input[type='text'], input[type='password'],button {
+
+i {
+    color: var(--greyColor)
+}
+
+input[type='text'], input[type='password'], button {
     border: 2px solid var(--lightColor);
     padding: 7px 30px;
     transition: var(--transition);
     box-shadow: var(--boxShadow);
 }
-button {
+
+button, .createPostBtn, .selectedSort {
     background-color: var(--greyColor);
     color: var(--lightColor);
-    border: 2px solid  var(--greyColor);
+    border: 2px solid var(--greyColor);
 }
+
 input[type='checkbox'] {
     max-width: 20px;
 }
-input:hover  {
+
+input:hover {
     background-color: var(--lightColor);
-    border: 2px solid  var(--lightColor);
+    border: 2px solid var(--lightColor);
 }
-button:hover {
+
+button:hover, .createPostBtn:hover {
     background-color: var(--lightColor);
     color: var(--darkColor);
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, var(--greyColor) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
+
 input:focus {
     border: 2px solid var(--greyColor);
     outline: none;
 }
+
 ::placeholder {
     color: #c9c6c6;
     text-align: center;
 }
+
 .startPage {
     height: 100vh;
 }
+
 header h2, header h1 {
     font-size: 5vw;
 }
+
 header h2 {
     font-weight: 900;
     background: -webkit-linear-gradient(45deg, #DBE2EF, #3F72AF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .nav {
-    height: 10vh;
+    height: 80px;
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     align-items: center;
@@ -94,10 +112,14 @@ header h2 {
     background-color: var(--lightColor);
     z-index: 1;
 }
-.navUserLogo {
-    width: 10vw;
-    height: 100%;
+
+.nav .navUserLogo {
     border-bottom: 2px solid var(--lightColor);
+}
+
+.navUserLogo {
+    /*width: 10vw;*/
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,10 +133,23 @@ header h2 {
     border-radius: 50%;
     margin: 10px;
 }
-.navUserLogo:hover {
-  color: #3F72AF;
+
+/*.navUserLogo:hover {*/
+/*    color: #3F72AF;*/
+/*}*/
+
+.navLinksDiv {
+    display: flex;
+    float: left;
+
 }
+
+.burgerMenu {
+    display: none;
+}
+
 .navLinks {
+    float: left;
     text-decoration: none;
     width: 10vw;
     height: 100%;
@@ -123,7 +158,14 @@ header h2 {
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+    cursor: pointer;
+    color: var(--darkColor);
 }
+
+.allUsers {
+    display: none;
+}
+
 .navLinks:hover, .active {
     border-bottom: 2px solid var(--darkColor);
 }
@@ -145,25 +187,33 @@ header h2 {
 .form {
     padding: 40px;
     gap: 20px;
+    width: 80%;
+    margin: auto;
 }
+
 .form input {
     width: 100%;
 }
+
 .formSpan {
     font-style: italic;
     cursor: pointer;
     transition: var(--transition);
 }
+
 .formSpan:hover {
     text-decoration: underline;
 }
+
 .profileBox {
     flex-direction: row;
     justify-content: space-around;
+    align-items: start;
+    max-width: 60vw;
 }
 
 .profileImgDiv {
-    max-width: 400px;
+    max-width: 100%;
 }
 
 .profileImgDiv img, .postImage img, .modalImage img {
@@ -178,11 +228,61 @@ header h2 {
     gap: 20px;
     justify-content: start;
     align-items: start;
-    padding: 15vh 20px 20px 20px;
+    padding: 100px 20px 20px 20px;
 }
 
+.usersSideBar {
+    position: fixed;
+    width: 300px;
+    overflow-y: scroll;
+    top: 80px;
+    bottom: 0;
+    right: 10px;
+}
+.username {
+    word-break: break-word;
+}
+.postsCont {
+    padding-right: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.sortCont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 20px;
+}
 .singleUser {
-    flex: 1;
+    padding: 5px;
+}
+.usersSideBar .singleUser {
+    box-shadow: none;
+    padding: 5px;
+    margin: 5px;
+}
+.openPostCont .singleUser {
+    box-shadow: none;
+    padding:0;
+ }
+.openPostCont .singleUser img {
+    margin: 0 10px 10px 0;
+}
+.openPostCont .singleUser .username {
+    font-size: x-large;
+}
+.usersSideBar .singleUser:hover {
+    background-color: white;
+}
+
+.usersSideBar .singleUser button {
+    font-size: small;
+    padding: 5px;
 }
 
 .singleUser .navUserLogo {
@@ -206,7 +306,7 @@ header h2 {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--lightColor);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -221,16 +321,28 @@ header h2 {
     text-align: center;
     display: flex;
     justify-content: center;
+    font-size: small;
+    height: 50px;
 }
 
-.sortBtn div {
+.sortBtn div, .createPostBtn {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 2px;
+}
+
+.sortBtn div:hover {
+    background-color: var(--darkColor);
+    color: var(--lightColor)
 }
 
 .allPosts {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .singlePost {
@@ -240,6 +352,32 @@ header h2 {
 
 .singlePost:hover {
     transform: scale(105%);
+}
+
+.openPostCont, .openPostInputDiv {
+    display: flex;
+}
+.openPostCont, .openPostInputDiv input {
+  /*width: 100%*/
+  /*  widht: webkit fill availble*/
+}
+.openPostCont {
+    padding: 10px;
+    height: 95%;
+}
+.openPostCont h2 {
+    margin-top: 0.5rem;
+    min-height: 100px;
+}
+.commentsDiv {
+    height: 20vh;
+    overflow: auto;
+    background-color: white;
+    padding: 5px;
+}
+
+.commentsDiv .messageBox {
+    width: 95%;
 }
 
 .postImage {
@@ -253,8 +391,16 @@ header h2 {
 }
 
 .modalImage {
-    max-width: 400px;
-    max-height: 400px;
+    /*max-width: 400px;*/
+    /*max-height: 400px;*/
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .sortInactive {
@@ -323,7 +469,93 @@ header h2 {
     font-style: italic;
 }
 
+.error {
+    font-size: small;
+    text-align: center;
+}
 
-@media (min-width: 768px) {
 
+@media (max-width: 768px) {
+    .nav .navLinks {
+        display: none;
+    }
+
+    .mainNav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .burgerMenu {
+        display: block;
+    }
+
+    .nav {
+        position: relative;
+    }
+
+    .nav.responsive {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .nav.responsive .navLinksDiv {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav.responsive .navLinks {
+        display: block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .allUsers {
+        display: block;
+    }
+
+    .usersSideBar {
+        display: none;
+    }
+
+    .contentPage {
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profileBox {
+        flex-direction: column;
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .postsCont {
+        padding: 20px;
+    }
+
+    .openPostCont {
+        overflow: auto;
+    }
+
+    .openPostCont {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .commentsDiv {
+        height: 15vh;
+        overflow: unset;
+    }
+    .myModal {
+        padding-top: 0;
+    }
+
+    .postModal .modal-content {
+        height: 100%;
+    }
 }
