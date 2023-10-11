@@ -9,8 +9,8 @@ const SingleMessage = ({message}) => {
         <div className="messageBox"
              style={loggedInUser.username === message.username ? {alignSelf: 'end', backgroundColor:'#393E46', color: '#EEEEEE'} : {alignSelf: 'start', backgroundColor:'#EEEEEE'}}
         >
-            <div>
-                <b>{loggedInUser.username === message.username ? 'You' : message.username}: </b>
+            <div className="d-flex flex-column">
+                <b>{loggedInUser.username === message.username ? 'You' : message.username} </b>
                 <div className="message"> {message.message}</div>
             </div>
             {message.time && <div className="date">{message.time}</div>}

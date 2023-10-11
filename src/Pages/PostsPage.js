@@ -71,16 +71,39 @@ const PostsPage = () => {
                     <div className="sortCont">
                         <div>SORT BY:</div>
                         <div className="sortBtn" onClick={handleCommentSort}>
-                            <div className={selectedSort==='mostComments' ? 'selectedSort' : sortMostComments ? 'sortInactive' : ''} >MOST COMMENTS</div>
-                            <div className={selectedSort==='leastComments' ? 'selectedSort' : sortMostComments ? '' : 'sortInactive'}>LEAST COMMENTS</div>
+                            <div className={selectedSort==='mostComments' || selectedSort==='leastComments' ? 'selectedSort' : ''}>
+                                COMMENTS
+                                {selectedSort==='mostComments'
+                                    ?
+                                    <i className="fa-solid fa-chevron-up"></i>
+                                    :
+                                    <i className="fa-solid fa-chevron-down"></i>}
+                            </div>
                         </div>
                         <div className="sortBtn" onClick={handleLikesSort}>
-                            <div  className={selectedSort==='mostLikes' ? 'selectedSort' : sortMostLikes ? 'sortInactive' : ''}>MOST LIKES</div>
-                            <div  className={selectedSort==='leastLikes' ? 'selectedSort' : sortMostLikes ? '' : 'sortInactive'}>LEAST LIKES</div>
+                            <div  className={selectedSort==='mostLikes' || selectedSort==='leastLikes' ? 'selectedSort' : ''}>
+                                LIKES
+                                {selectedSort==='mostLikes'
+                                    ?
+                                    <i className="fa-solid fa-chevron-up"></i>
+                                    :
+                                    <i className="fa-solid fa-chevron-down"></i>}
+                            </div>
                         </div>
                         <div className="sortBtn" onClick={handleTimeSort}>
-                            <div  className={selectedSort==='oldest' ? 'selectedSort' : sortOldest ? 'sortInactive' : ''}>OLDEST</div>
-                            <div  className={selectedSort==='newest' ? 'selectedSort' : sortOldest ? '' : 'sortInactive'}>NEWEST</div>
+                            <div  className={selectedSort==='oldest' || selectedSort==='newest'? 'selectedSort' : ''}>
+                                {/*TIME*/}
+                                {selectedSort==='oldest'
+                                    ?
+                                    <div>OLDEST
+                                        {/*<i className="fa-solid fa-chevron-up"></i>*/}
+                                    </div>
+                                    :
+                                    <div>NEWEST
+                                        {/*<i className="fa-solid fa-chevron-down"></i>*/}
+                                    </div>}
+                            </div>
+                            {/*<div  className={selectedSort==='newest' ? 'selectedSort' : sortOldest ? '' : 'sortInactive'}>NEWEST</div>*/}
                         </div>
                         <div className="createPostBtn" onClick={()=> setDisplay('block')}>CREATE NEW POST</div>
                     </div>

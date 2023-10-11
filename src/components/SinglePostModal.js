@@ -1,8 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import SingleUser from "./SingleUser";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {socket} from "../App";
-import {updateAllPosts} from "../features/user";
 import SingleMessage from "./SingleMessage";
 
 const SinglePostModal = ({author, setDisplay, display, time}) => {
@@ -11,24 +10,32 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
     const post = useSelector(state=>state.user.openPost);
     const commentRef = useRef();
     const commentsDivRef = useRef();
+    const [error, setError] = useState();
+    // const [ifClicked, setIfClicked] = useState(false);
 
     const scrollToBottom = () => {
         commentsDivRef.current?.scrollIntoView({behavior: "smooth"})
     }
-
     useEffect(() => {
         scrollToBottom()
     }, [post]);
+    // useEffect(() => {
+    //     if(ifClicked) setDisplay('none');
+    //     // if(!ifClicked) setDisplay('block');
+    // },[])
     function closeModal() {
-        setDisplay('none')
+        setDisplay('none');
+        setError();
     }
     function handlePostLike() {
         socket.emit('handleLike', post._id, loggedInUser._id);
     }
     function handleComments(e) {
         e.preventDefault();
+        if(!commentRef.current.value) return setError('Note: comment cannot be empty.')
         socket.emit('sendComment', commentRef.current.value, post._id, loggedInUser._id);
         commentRef.current.value = '';
+        setError();
     }
 
     return (
@@ -39,13 +46,14 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                         <i className="fa-regular fa-circle-xmark"></i>
                     </div>
                     <div className="openPostCont gap-4">
-                        <div className="f1 d-flex align-items-center">
+                        <div className="f1 d-flex align-items-center justify-content-center">
                             <div className="modalImage">
                                 <img src={post.image} alt=""/>
                             </div>
                         </div>
                         <div className="f1">
                             {author && <SingleUser user={author}/>}
+                            {/*{author && <SingleUser user={author} ifClicked={ifClicked} setIfClicked={setIfClicked}/>}*/}
                             <div className="date">{time}</div>
                             <h2>
                                 {post.title}
@@ -56,9 +64,14 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                                     <div className="d-flex gap-4">
                                         <div className="d-flex align-items-center gap-2" onClick={handlePostLike} style={{cursor: 'pointer'}}>
                                             {!post.likes.includes(loggedInUser._id) ?
-                                                <i className="fa-solid fa-thumbs-up"></i>
+                                                <div className="hover" >
+                                                    <span>Like</span> <i className="fa-solid fa-thumbs-up"></i>
+                                                </div>
                                                 :
-                                                <i className="fa-solid fa-thumbs-down"></i> }
+                                                <div className="hover" >
+                                                    <span>Unlike</span> <i className="fa-solid fa-thumbs-down"></i>
+                                                </div>
+                                                 }
                                             <b>
                                                 {post.likes.length}
                                             </b>
@@ -72,7 +85,7 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                                 </div>
 
                             </div>
-                            <div>
+                            <div className="position-relative">
                                 <div className="commentsDiv mt-2">{
                                     post.comments.length === 0 ?
                                         <div>No comments yet</div>
@@ -84,19 +97,20 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                                             <div ref={commentsDivRef}></div>
                                         </div>
 
-                                            }</div>
+                                            }
+                                </div>
                                 <form onSubmit={handleComments} className="openPostInputDiv">
                                     <input type="text" ref={commentRef} placeholder="your comment..."/>
                                     <button type="submit">COMMENT</button>
                                 </form>
-
                             </div>
+                            <div className="error">{error}</div>
                         </div>
-
                     </div>
                 </div>
             }
         </div>
+
 );
 };
 

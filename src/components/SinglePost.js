@@ -40,7 +40,7 @@ const SinglePost = ({post}) => {
     return (
         <div className={display==='none' ? "box singlePost" : 'box'}>
             <div className="w-100 text-center d-flex flex-column gap-1" onClick={openModal}>
-                <div>
+                <div className="wordBreak">
                     {post.title}
                 </div>
                 <div className="postImage">

@@ -34,9 +34,8 @@ const MessagesPage = () => {
                 <div className="f1 h-100 d-flex flex-column justify-content-start gap-2 overflow-auto p-2">
                     {loggedInUser && allConversations.length > 0 && allConversations.map(conversation =>
                         <SingleUser
-                            key={conversation._id}
-                            user={conversation.users.filter(user => user !== loggedInUser.username)[0]}
-                            conversationId={conversation._id}
+                            key={conversation.conversationId}
+                            user={conversation}
                         />
                     )}
                 </div>

@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {socket} from "../App";
 import {useSelector} from "react-redux";
+import SingleUser from "./SingleUser";
 
 
 
@@ -46,7 +47,10 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
                 </div>
                 {user && type === 'message' ?
                     <div className="text-center d-flex flex-column gap-4">
-                        <div>SEND A PRIVATE MESSAGE TO {user.username}</div>
+                        <div className="navUserLogo">
+                            <img style={{border: user.isOnline ? '5px solid  #18a818': ' 5px solid #f35353'}} src={user.profileImg} alt=""/>
+                            <div> {user.username}</div>
+                        </div>
                         <textarea rows="4" ref={messageRef} placeholder="message"/>
                         <button onClick={sendMessage}>SEND</button>
                     </div>
@@ -55,7 +59,7 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
                         <div>CREATE NEW POST</div>
                         <input type="text" ref={titleRef} placeholder="post title"/>
                         <input type="text" ref={imageRef} placeholder="post image url"/>
-                        <button onClick={createNewPost}>CREATE</button>
+                        <button onClick={createNewPost}>POST</button>
                     </div>
                 }
                 <div className="error">{error}</div>
