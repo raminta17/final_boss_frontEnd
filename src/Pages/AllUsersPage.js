@@ -22,7 +22,7 @@ const AllUsersPage = () => {
     return (
         <>
             <NavBar/>
-            <div className="contentPage">
+            <div className="contentPage allUsersPage">
                 {allUsers.map(user =>
                     <SingleUser key={user._id} user={user}/>
                 )}

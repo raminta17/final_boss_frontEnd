@@ -87,7 +87,7 @@ const ProfilePage = () => {
         <>
             <NavBar/>
             {loggedInUser &&
-                <div className="contentPage">
+                <div className="contentPage profilePage">
                     <div className="box profileBox flex-wrap">
                         <div className="d-flex flex-column gap-2 f1">
                             <div className="profileImgDiv">
@@ -96,6 +96,7 @@ const ProfilePage = () => {
                             <h3>{loggedInUser.username}</h3>
                         </div>
                         <div className="d-flex flex-column f1 gap-4 w-100">
+                            <h5>Update your profile</h5>
                             <div className="d-flex flex-column gap-4">
                                 <input type="text" ref={imgRef} placeholder="Your new profile picture url"/>
                                 <button onClick={updateProfileImg}>Update photo</button>

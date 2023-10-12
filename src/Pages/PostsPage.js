@@ -71,8 +71,8 @@ const PostsPage = () => {
                     <div className="sortCont">
                         <div>SORT BY:</div>
                         <div className="sortBtn" onClick={handleCommentSort}>
-                            <div className={selectedSort==='mostComments' || selectedSort==='leastComments' ? 'selectedSort' : ''}>
-                                COMMENTS
+                            <div className={selectedSort==='mostComments' || selectedSort==='leastComments' ? 'selectedSort gap-2' : 'gap-2'}>
+                                <div>COMMENTS</div>
                                 {selectedSort==='mostComments'
                                     ?
                                     <i className="fa-solid fa-chevron-up"></i>
@@ -81,7 +81,7 @@ const PostsPage = () => {
                             </div>
                         </div>
                         <div className="sortBtn" onClick={handleLikesSort}>
-                            <div  className={selectedSort==='mostLikes' || selectedSort==='leastLikes' ? 'selectedSort' : ''}>
+                            <div  className={selectedSort==='mostLikes' || selectedSort==='leastLikes' ? 'selectedSort gap-2' : 'gap-2'}>
                                 LIKES
                                 {selectedSort==='mostLikes'
                                     ?
@@ -91,7 +91,7 @@ const PostsPage = () => {
                             </div>
                         </div>
                         <div className="sortBtn" onClick={handleTimeSort}>
-                            <div  className={selectedSort==='oldest' || selectedSort==='newest'? 'selectedSort' : ''}>
+                            <div  className={selectedSort==='oldest' || selectedSort==='newest'? 'selectedSort gap-2' : 'gap-2'}>
                                 {/*TIME*/}
                                 {selectedSort==='oldest'
                                     ?
@@ -103,7 +103,6 @@ const PostsPage = () => {
                                         {/*<i className="fa-solid fa-chevron-down"></i>*/}
                                     </div>}
                             </div>
-                            {/*<div  className={selectedSort==='newest' ? 'selectedSort' : sortOldest ? '' : 'sortInactive'}>NEWEST</div>*/}
                         </div>
                         <div className="createPostBtn" onClick={()=> setDisplay('block')}>CREATE NEW POST</div>
                     </div>
