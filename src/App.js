@@ -111,7 +111,7 @@ function App() {
         socket.on('sendingAllUsers', data => {
             const currentLoggedInUser = loggedInUserRef.current;
             let allUsersExceptSelf = [];
-            if(currentLoggedInUser)  allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
+            if(currentLoggedInUser) allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
             dispatch(updateAllUsers(allUsersExceptSelf));
         })
         socket.on('sending new conversation', (conversation, msg) => {
