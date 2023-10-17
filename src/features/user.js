@@ -36,6 +36,13 @@ export const userSlice = createSlice({
         updateAllConversations: (state, action) => {
             state.allConversations = action.payload;
         },
+        updateSingleConversationUserStatus: (state,action) => {
+            state.allConversations = state.allConversations.map(conversation => {
+                if(conversation.username !== action.payload.username) return conversation;
+                conversation.isOnline = action.payload.isOnline;
+                return conversation;
+            })
+        },
         addNewConversation: (state, action) => {
             state.allConversations.push(action.payload);
         },
@@ -56,6 +63,7 @@ export const {updateLoggedInUser,
     updateOpenPost,
     updateActivePostSort,
 updateAllConversations,
+    updateSingleConversationUserStatus,
     addNewConversation,
     updateOpenConversation,
     addNewMessage} = userSlice.actions;

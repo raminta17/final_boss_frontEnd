@@ -87,7 +87,7 @@ const ProfilePage = () => {
         <>
             <NavBar/>
             {loggedInUser &&
-                <div className="contentPage profilePage">
+                <div className="profilePage contentPage">
                     <div className="box profileBox flex-wrap">
                         <div className="d-flex flex-column gap-2 f1">
                             <div className="profileImgDiv">

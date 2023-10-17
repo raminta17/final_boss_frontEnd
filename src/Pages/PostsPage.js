@@ -68,45 +68,49 @@ const PostsPage = () => {
             <NavBar/>
             <div className="contentPage">
                 <div className="postsCont">
-                    <div className="sortCont">
-                        <div>SORT BY:</div>
-                        <div className="sortBtn" onClick={handleCommentSort}>
-                            <div className={selectedSort==='mostComments' || selectedSort==='leastComments' ? 'selectedSort gap-2' : 'gap-2'}>
-                                <div>COMMENTS</div>
-                                {selectedSort==='mostComments'
-                                    ?
-                                    <i className="fa-solid fa-chevron-up"></i>
-                                    :
-                                    <i className="fa-solid fa-chevron-down"></i>}
-                            </div>
-                        </div>
-                        <div className="sortBtn" onClick={handleLikesSort}>
-                            <div  className={selectedSort==='mostLikes' || selectedSort==='leastLikes' ? 'selectedSort gap-2' : 'gap-2'}>
-                                LIKES
-                                {selectedSort==='mostLikes'
-                                    ?
-                                    <i className="fa-solid fa-chevron-up"></i>
-                                    :
-                                    <i className="fa-solid fa-chevron-down"></i>}
-                            </div>
-                        </div>
-                        <div className="sortBtn" onClick={handleTimeSort}>
-                            <div  className={selectedSort==='oldest' || selectedSort==='newest'? 'selectedSort gap-2' : 'gap-2'}>
-                                {/*TIME*/}
-                                {selectedSort==='oldest'
-                                    ?
-                                    <div>OLDEST
-                                        {/*<i className="fa-solid fa-chevron-up"></i>*/}
+                    <div className="sortCont w-100">
+                        <div className="d-flex gap-2 align-items-center flex-wrap justify-content-center">
+                            <div>SORT BY:</div>
+                            <div className="d-flex gap-2 flex-wrap justify-content-center">
+                                <div className="sortBtn" onClick={handleCommentSort}>
+                                    <div className={selectedSort==='mostComments' || selectedSort==='leastComments' ? 'selectedSort gap-2' : 'gap-2'}>
+                                        <div>COMMENTS</div>
+                                        {selectedSort==='mostComments'
+                                            ?
+                                            <i className="fa-solid fa-chevron-up"></i>
+                                            :
+                                            <i className="fa-solid fa-chevron-down"></i>}
                                     </div>
-                                    :
-                                    <div>NEWEST
-                                        {/*<i className="fa-solid fa-chevron-down"></i>*/}
-                                    </div>}
+                                </div>
+                                <div className="sortBtn" onClick={handleLikesSort}>
+                                    <div  className={selectedSort==='mostLikes' || selectedSort==='leastLikes' ? 'selectedSort gap-2' : 'gap-2'}>
+                                        LIKES
+                                        {selectedSort==='mostLikes'
+                                            ?
+                                            <i className="fa-solid fa-chevron-up"></i>
+                                            :
+                                            <i className="fa-solid fa-chevron-down"></i>}
+                                    </div>
+                                </div>
+                                <div className="sortBtn" onClick={handleTimeSort}>
+                                    <div  className={selectedSort==='oldest' || selectedSort==='newest'? 'selectedSort gap-2' : 'gap-2'}>
+                                        {/*TIME*/}
+                                        {selectedSort==='oldest'
+                                            ?
+                                            <div>OLDEST
+                                                {/*<i className="fa-solid fa-chevron-up"></i>*/}
+                                            </div>
+                                            :
+                                            <div>NEWEST
+                                                {/*<i className="fa-solid fa-chevron-down"></i>*/}
+                                            </div>}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div className="createPostBtn" onClick={()=> setDisplay('block')}>CREATE NEW POST</div>
                     </div>
-
                     {allPosts.length> 0 && <div className="allPosts">
                         {allPosts.map(post =>
                             <SinglePost key={post._id} post={post}/>

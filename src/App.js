@@ -17,7 +17,7 @@ import {
     updateLoggedInUser,
     updateOpenConversation,
     updateOpenPost,
-    addNewMessage
+    addNewMessage, updateAllConversations, updateSingleConversationUserStatus
 } from "./features/user";
 
 export const socket = io('http://localhost:8000', {
@@ -30,10 +30,11 @@ function App() {
     let activePostSort = useSelector(state=>state.user.activePostSort)
     let loggedInUser = useSelector(state=>state.user.loggedInUser);
     let openConversation = useSelector(state=>state.user.openConversation);
+    let allUsers = useSelector(state=>state.user.allUsers);
     const activePostSortRef = useRef(activePostSort);
     const loggedInUserRef = useRef(loggedInUser);
     const openConversationRef = useRef(openConversation);
-
+    const allUsersRef = useRef(allUsers);
 
     // Update the ref whenever value in redux changes so I could see the change inside socket.on
     useEffect(() => {
@@ -45,6 +46,9 @@ function App() {
     useEffect(() => {
         openConversationRef.current = openConversation;
     }, [openConversation]);
+    useEffect(() => {
+        allUsersRef.current = allUsers;
+    }, [allUsers]);
 
     useEffect(() => {
         if((localStorage.getItem('TOKEN'))){
@@ -52,9 +56,6 @@ function App() {
                 token: localStorage.getItem('TOKEN')
             }
             socket.connect();
-            socket.on('connect', () => {
-                console.log('you have connected', socket.id);
-            })
             const options = {
                 method: 'GET',
                 headers: {
@@ -109,10 +110,20 @@ function App() {
             dispatch(updateAllPosts(allPosts));
         })
         socket.on('sendingAllUsers', data => {
+            console.log('getting all users from sockets')
             const currentLoggedInUser = loggedInUserRef.current;
             let allUsersExceptSelf = [];
             if(currentLoggedInUser) allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
             dispatch(updateAllUsers(allUsersExceptSelf));
+        })
+        socket.on('sendingConnectionUpdate', user => {
+            let currentAllUsers = allUsersRef.current;
+            currentAllUsers = currentAllUsers.map(currentUser => {
+                if(currentUser.username !== user.username) return currentUser;
+                return user;
+            })
+            dispatch(updateAllUsers(currentAllUsers));
+            dispatch(updateSingleConversationUserStatus(user));
         })
         socket.on('sending new conversation', (conversation, msg) => {
             dispatch(addNewConversation(conversation));

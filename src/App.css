@@ -180,28 +180,29 @@ header h2 {
     gap: 10px;
     background-color: var(--lightColor);
 }
-
 .form {
     padding: 40px;
     gap: 20px;
     width: 80%;
     margin: auto;
 }
-
 .form input {
     width: 100%;
 }
-
 .formSpan {
     font-style: italic;
     cursor: pointer;
     transition: var(--transition);
 }
-
 .formSpan:hover {
     text-decoration: underline;
 }
-
+.profilePage {
+    justify-content: center;
+}
+.profilePage .box {
+    box-shadow: none;
+}
 .profileBox {
     flex-direction: row;
     justify-content: space-around;
@@ -256,7 +257,7 @@ header h2 {
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 10px;
 }
 .messagesPage .singleUser, .usersSideBar .singleUser {
     transition: var(--transition);
@@ -436,6 +437,7 @@ header h2 {
     display: flex;
     flex-direction: column;
     background-color: white;
+    padding: 20px;
 }
 .inputs {
 display: flex;

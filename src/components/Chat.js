@@ -18,16 +18,12 @@ const Chat = () => {
 
     return (
         <>
-
-                    <div className="chatBox">
-                        { loggedInUser && conversation &&conversation.messages.map((message, index) =>
-                        <SingleMessage key={index} message={message}/>
-                    )}
-                        <div ref={chatRef}></div>
-                    </div>
-
-
-
+            <div className="chatBox">
+                {loggedInUser && conversation && conversation.messages.map((message, index) =>
+                    <SingleMessage key={index} message={message}/>
+                )}
+                <div ref={chatRef}></div>
+            </div>
         </>
 
     );
