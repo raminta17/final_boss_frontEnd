@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {updateLoggedInUser, updateImg} from "../features/user";
 import {socket} from "../App";
+import button from "bootstrap/js/src/button";
 const ProfilePage = () => {
 
     const imgRef = useRef();
@@ -14,7 +15,8 @@ const ProfilePage = () => {
     const dispatch = useDispatch();
     const loggedInUser = useSelector(state => state.user.loggedInUser);
     const passRegex = /(?=.*[A-Z])/;
-    const [display, setDisplay] = useState('none');
+    const [displayPhoto, setDisplayPhoto] = useState('none');
+    const [displayPass, setDisplayPass] = useState('none');
     const [error, setError] = useState();
 
     useEffect(() => {
@@ -73,7 +75,7 @@ const ProfilePage = () => {
                 oldPassRef.current.value = '';
                 newPassRef.current.value = '';
                 repeatNewPassRef.current.value = '';
-                setDisplay('none');
+                setDisplayPass('none');
                 setError();
                 nav('/');
                 localStorage.removeItem('TOKEN');
@@ -87,25 +89,40 @@ const ProfilePage = () => {
         <>
             <NavBar/>
             {loggedInUser &&
-                <div className="profilePage contentPage">
+                <div className="profilePage">
                     <div className="box profileBox flex-wrap">
                         <div className="d-flex flex-column gap-2 f1">
                             <div className="profileImgDiv">
                                 <img src={loggedInUser.profileImg} alt=""/>
                             </div>
-                            <h3>{loggedInUser.username}</h3>
                         </div>
-                        <div className="d-flex flex-column f1 gap-4 w-100">
-                            <h5>Update your profile</h5>
+                        <div className="d-flex flex-column f1 w-100 gap-4">
+                            <h2 className="border-bottom border-secondary pb-2">{loggedInUser.username}</h2>
+                            {/*<h5 className="mt-4">Update your profile</h5>*/}
                             <div className="d-flex flex-column gap-4">
-                                <input type="text" ref={imgRef} placeholder="Your new profile picture url"/>
-                                <button onClick={updateProfileImg}>Update photo</button>
+                                {displayPhoto === 'none' ?
+                                    <button onClick={() => setDisplayPhoto('flex')}>Change photo</button>
+                                    :
+                                    <form onSubmit={updateProfileImg} style={{display: displayPhoto}} className="flex-column gap-2">
+                                        <div className="w-100 position-relative">
+                                            <input className="w-100" type="text" ref={imgRef} placeholder="Your new profile picture url"/>
+                                            <i onClick={() => setDisplayPhoto('none')} className="fa-regular fa-circle-xmark position-absolute close"></i>
+                                            {/*<b className="position-absolute close" onClick={() => setDisplayPhoto('none')}>x</b>*/}
+                                        </div>
+
+                                        <button>Update photo</button>
+                                    </form>}
                             </div>
-                            {display === 'none' ?
-                                <button onClick={() => setDisplay('flex')}>Change Password</button>
+                            {displayPass === 'none' ?
+                                <button onClick={() => setDisplayPass('flex')}>Change Password</button>
                                 :
-                                <form onSubmit={changePassword} style={{display: display}} className="flex-column gap-2">
-                                    <input type="password" ref={oldPassRef} placeholder="old password"/>
+                                <form onSubmit={changePassword} style={{display: displayPass}} className="flex-column gap-2">
+                                    <div className="w-100 position-relative">
+                                        <input className="w-100" type="password" ref={oldPassRef} placeholder="old password"/>
+                                        <i onClick={() => setDisplayPass('none')} className="fa-regular fa-circle-xmark position-absolute close"></i>
+                                        {/*<b className="position-absolute close" onClick={() => setDisplayPass('none')}>x</b>*/}
+
+                                    </div>
                                     <input type="password" ref={newPassRef} placeholder="new password"/>
                                     <input type="password" ref={repeatNewPassRef} placeholder="repeat new password"/>
                                     <button>Change password</button>

@@ -110,7 +110,6 @@ function App() {
             dispatch(updateAllPosts(allPosts));
         })
         socket.on('sendingAllUsers', data => {
-            console.log('getting all users from sockets')
             const currentLoggedInUser = loggedInUserRef.current;
             let allUsersExceptSelf = [];
             if(currentLoggedInUser) allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);

@@ -43,7 +43,7 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
             {post &&
                 <div className="modal-content">
                     <div className="text-end" onClick={closeModal}>
-                        <i className="fa-regular fa-circle-xmark"></i>
+                        <i className="fa-regular fa-circle-xmark close"></i>
                     </div>
                     <div className="openPostCont gap-4">
                         <div className="f1 d-flex align-items-center justify-content-center">

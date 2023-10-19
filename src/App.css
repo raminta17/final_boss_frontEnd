@@ -198,7 +198,12 @@ header h2 {
     text-decoration: underline;
 }
 .profilePage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
+    align-items: start;
+    padding: 100px 20px 20px 20px;
 }
 .profilePage .box {
     box-shadow: none;
@@ -208,9 +213,7 @@ header h2 {
     justify-content: space-around;
     align-items: start;
     max-width: 60vw;
-    /*box-shadow: none;*/
 }
-
 .profileImgDiv {
     max-width: 100%;
 }
@@ -220,7 +223,15 @@ header h2 {
     height: 100%;
     object-fit: contain;
 }
-
+.close {
+    top:-15px;
+    right:-15px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.close:hover {
+    color: lightgrey;
+}
 .contentPage {
     display: flex;
     flex-wrap: wrap;
@@ -276,6 +287,18 @@ header h2 {
 .openPostCont .singleUser img {
     margin: 0 10px 10px 0;
 }
+.online {
+    top: 50px;
+    left:45px;
+}
+.openPostCont .singleUser .online
+,
+.openPostCont .messageModal .online
+{
+    top: 40px;
+    left:35px;
+}
+
 
 .openPostCont .singleUser .username {
     font-size: x-large;
@@ -508,7 +531,14 @@ display: flex;
     text-align: center;
 }
 
-
+@media (max-width: 1180px) {
+    .createPostBtn {
+        width: 100%;
+    }
+    .sortCont div:nth-child(1) {
+        margin: auto;
+    }
+}
 @media (max-width: 768px) {
     .nav .navLinks, .usersSideBar {
         display: none;

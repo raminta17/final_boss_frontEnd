@@ -7,7 +7,7 @@ export const userSlice = createSlice({
         allUsers: [],
         allPosts: [],
         openPost: null,
-        activePostSort: null,
+        activePostSort: 'newest',
         allConversations: [],
         openConversation: null
     },

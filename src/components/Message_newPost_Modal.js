@@ -43,12 +43,14 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
         <div className="myModal messageModal" style={{display: display}}>
             <div className="modal-content">
                 <div className="text-end" onClick={closeModal}>
-                    <i className="fa-regular fa-circle-xmark"></i>
+                    <i className="fa-regular fa-circle-xmark close"></i>
                 </div>
                 {user && type === 'message' ?
                     <div className="text-center d-flex flex-column gap-4">
-                        <div className="navUserLogo">
-                            <img style={{border: user.isOnline ? '5px solid  #18a818': ' 5px solid #f35353'}} src={user.profileImg} alt=""/>
+                        <div className="navUserLogo position-relative">
+                            <img src={user.profileImg} alt=""/>
+                            <div className="position-absolute online" style={{backgroundColor: user.isOnline ? '#18a818' : 'lightgray', border: '2px solid white',width:'12px', height: '12px', borderRadius: '50%'}}></div>
+
                             <div> {user.username}</div>
                         </div>
                         <textarea rows="4" ref={messageRef} placeholder="message"/>

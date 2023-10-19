@@ -69,7 +69,7 @@ const PostsPage = () => {
             <div className="contentPage">
                 <div className="postsCont">
                     <div className="sortCont w-100">
-                        <div className="d-flex gap-2 align-items-center flex-wrap justify-content-center">
+                        <div className="d-flex gap-2 align-items-center flex-wrap justify-content-center small">
                             <div>SORT BY:</div>
                             <div className="d-flex gap-2 flex-wrap justify-content-center">
                                 <div className="sortBtn" onClick={handleCommentSort}>

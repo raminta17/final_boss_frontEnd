@@ -18,9 +18,9 @@ const SingleUser = ({user, hideMessageButton,selected, setSelected}) => {
     return (
         <div className="box singleUser" style={{backgroundColor: selected === user.username? 'white' : ''}} onClick={startConversation}>
             <div className="navUserLogo justify-content-between">
-                <div className="d-flex align-items-center ">
-                    <img style={{border: user.isOnline ? '5px solid  #18a818': ' 5px solid #f35353'}} src={user.profileImg} alt=""/>
-
+                <div className="d-flex align-items-center position-relative">
+                    <img src={user.profileImg} alt=""/>
+                    <div className="position-absolute online" style={{backgroundColor: user.isOnline ? '#18a818' : 'lightgray', border: '2px solid white',width:'12px', height: '12px', borderRadius: '50%'}}></div>
                     <b className="wordBreak">{user.username}</b>
                 </div>
 
