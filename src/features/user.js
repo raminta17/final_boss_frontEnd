@@ -15,16 +15,16 @@ export const userSlice = createSlice({
         updateLoggedInUser: (state, action) => {
             state.loggedInUser = action.payload;
         },
-        updateImg: (state,action) => {
+        updateImg: (state, action) => {
             state.loggedInUser.profileImg = action.payload;
         },
-        updateAllUsers: (state,action) => {
+        updateAllUsers: (state, action) => {
             state.allUsers = action.payload;
         },
-        updateAllPosts: (state,action) => {
+        updateAllPosts: (state, action) => {
             state.allPosts = action.payload;
         },
-        addNewPost: (state,action) => {
+        addNewPost: (state, action) => {
             state.allPosts.push(action.payload);
         },
         updateOpenPost: (state, action) => {
@@ -36,11 +36,20 @@ export const userSlice = createSlice({
         updateAllConversations: (state, action) => {
             state.allConversations = action.payload;
         },
-        updateSingleConversationUserStatus: (state,action) => {
+        updateSingleConversationUserStatus: (state, action) => {
             state.allConversations = state.allConversations.map(conversation => {
-                if(conversation.username !== action.payload.username) return conversation;
+                if (conversation.username !== action.payload.username) return conversation;
                 conversation.isOnline = action.payload.isOnline;
+                conversation.profileImg = action.payload.profileImg;
                 return conversation;
+            })
+        },
+        updateSingleUser: (state, action) => {
+            state.allUsers = state.allUsers.map(user => {
+                if (user.username !== action.payload.username) return user;
+                user.isOnline = action.payload.isOnline;
+                user.profileImg = action.payload.profileImg;
+                return user;
             })
         },
         addNewConversation: (state, action) => {
@@ -55,17 +64,20 @@ export const userSlice = createSlice({
     }
 })
 
-export const {updateLoggedInUser,
+export const {
+    updateLoggedInUser,
     updateImg,
     updateAllUsers,
     updateAllPosts,
     addNewPost,
     updateOpenPost,
     updateActivePostSort,
-updateAllConversations,
+    updateAllConversations,
     updateSingleConversationUserStatus,
+    updateSingleUser,
     addNewConversation,
     updateOpenConversation,
-    addNewMessage} = userSlice.actions;
+    addNewMessage
+} = userSlice.actions;
 
 export default userSlice.reducer;

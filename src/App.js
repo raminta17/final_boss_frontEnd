@@ -17,7 +17,7 @@ import {
     updateLoggedInUser,
     updateOpenConversation,
     updateOpenPost,
-    addNewMessage, updateAllConversations, updateSingleConversationUserStatus
+    addNewMessage, updateAllConversations, updateSingleConversationUserStatus, updateSingleUser
 } from "./features/user";
 
 export const socket = io('http://localhost:8000', {
@@ -67,7 +67,7 @@ function App() {
                 .then(res => res.json()).then(data => {
                 dispatch(updateLoggedInUser(data.data))
             })
-        }
+        };
         socket.on('sending new post', (allPosts, newPost) => {
             const currentActivePostSort = activePostSortRef.current;
             if(currentActivePostSort === 'oldest') {
@@ -115,13 +115,8 @@ function App() {
             if(currentLoggedInUser) allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
             dispatch(updateAllUsers(allUsersExceptSelf));
         })
-        socket.on('sendingConnectionUpdate', user => {
-            let currentAllUsers = allUsersRef.current;
-            currentAllUsers = currentAllUsers.map(currentUser => {
-                if(currentUser.username !== user.username) return currentUser;
-                return user;
-            })
-            dispatch(updateAllUsers(currentAllUsers));
+        socket.on('sendingUserUpdate', user => {
+            dispatch(updateSingleUser(user));
             dispatch(updateSingleConversationUserStatus(user));
         })
         socket.on('sending new conversation', (conversation, msg) => {
@@ -134,7 +129,6 @@ function App() {
             if(currentOpenConversation && currentOpenConversation._id === conversationId) dispatch(addNewMessage(msg));
         })
         socket.on('sendingSelectedConversation', conversation => {
-            console.log(conversation);
             dispatch(updateOpenConversation(conversation))
         })
     }, []);

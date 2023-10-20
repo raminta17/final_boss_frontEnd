@@ -45,7 +45,7 @@ i {
     color: var(--greyColor)
 }
 
-input[type='text'], input[type='password'], button {
+input[type='text'],input[type='url'], input[type='password'], button {
     border: 2px solid var(--lightColor);
     padding: 7px 30px;
     transition: var(--transition);
