@@ -53,7 +53,6 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                         </div>
                         <div className="f1">
                             {author && <SingleUser user={author}/>}
-                            {/*{author && <SingleUser user={author} ifClicked={ifClicked} setIfClicked={setIfClicked}/>}*/}
                             <div className="date">{time}</div>
                             <h2>
                                 {post.title}

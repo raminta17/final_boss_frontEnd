@@ -18,10 +18,14 @@ const Chat = () => {
 
     return (
         <>
-            <div className="chatBox">
-                {loggedInUser && conversation && conversation.messages.map((message, index) =>
+            <div className="chatBox" style={{backgroundColor: conversation ? 'white' : ''}}>
+                {loggedInUser && conversation ? conversation.messages.map((message, index) =>
                     <SingleMessage key={index} message={message}/>
-                )}
+                )
+                :
+                <div className="h-100 d-flex align-items-center justify-content-center gap-2">
+                    <i className="fa-solid fa-arrow-left"></i>
+                    Select a conversation</div>}
                 <div ref={chatRef}></div>
             </div>
         </>
