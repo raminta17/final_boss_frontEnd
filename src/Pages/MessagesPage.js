@@ -25,13 +25,6 @@ const MessagesPage = () => {
         if(conversation) setSelected(conversation.users.find(user => user !== loggedInUser.username))
     }, []);
 
-    useEffect(() => {
-        if(loggedInUser)
-        fetch('http://localhost:8000/getAllConversations/'+ loggedInUser.username)
-            .then(res => res.json()).then(data => {
-            dispatch(updateAllConversations(data.data));
-        })
-    }, [loggedInUser]);
 
     function sendMsg(e) {
         e.preventDefault();

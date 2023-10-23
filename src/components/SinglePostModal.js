@@ -11,7 +11,7 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
     const commentRef = useRef();
     const commentsDivRef = useRef();
     const [error, setError] = useState();
-    // const [ifClicked, setIfClicked] = useState(false);
+
 
     const scrollToBottom = () => {
         commentsDivRef.current?.scrollIntoView({behavior: "smooth"})
@@ -19,10 +19,7 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
     useEffect(() => {
         scrollToBottom()
     }, [post]);
-    // useEffect(() => {
-    //     if(ifClicked) setDisplay('none');
-    //     // if(!ifClicked) setDisplay('block');
-    // },[])
+
     function closeModal() {
         setDisplay('none');
         setError();
@@ -58,7 +55,7 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                                 {post.title}
                             </h2>
                             <div className="d-flex gap-3 align-items-center">
-                                <div className="d-flex justify-content-between w-100">
+                                <div className="d-flex justify-content-between w-100 commentsLikes">
                                     <h4>Comments</h4>
                                     <div className="d-flex gap-4">
                                         <div className="d-flex align-items-center gap-2" onClick={handlePostLike} style={{cursor: 'pointer'}}>

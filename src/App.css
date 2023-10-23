@@ -390,8 +390,7 @@ header h2 {
 }
 
 .openPostCont .openPostInputDiv input {
-    width: 70%;
-    /*box-shadow: none;*/
+    width: 80%;
 }
 
 .openPostCont {
@@ -402,6 +401,7 @@ header h2 {
 .openPostCont h2 {
     margin-top: 0.5rem;
     min-height: 100px;
+    word-break: break-word;
 }
 
 .commentsDiv {
@@ -616,14 +616,16 @@ display: flex;
     .commentsDiv {
         overflow: unset;
         height: auto;
-
-
     }
-
+    .commentsLikes {
+        flex-direction: column-reverse;
+    }
+    .commentsLikes h4 {
+        margin-top: 0.5rem;
+    }
     .postModal {
         padding-top: 0;
     }
-
     .postModal .modal-content {
         height: 100%;
         padding-bottom: 40px;

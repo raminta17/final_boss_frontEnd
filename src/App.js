@@ -119,6 +119,9 @@ function App() {
             dispatch(updateSingleUser(user));
             dispatch(updateSingleConversationUserStatus(user));
         })
+        socket.on('sendingConversations', conversations => {
+            dispatch(updateAllConversations(conversations));
+        })
         socket.on('sending new conversation', (conversation, msg) => {
             dispatch(addNewConversation(conversation));
             console.log('conversation', conversation)

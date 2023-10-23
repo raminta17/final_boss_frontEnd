@@ -51,6 +51,7 @@ export const userSlice = createSlice({
                 user.profileImg = action.payload.profileImg;
                 return user;
             })
+            state.allUsers = state.allUsers.sort((user1,user2) => user2.isOnline - user1.isOnline);
         },
         addNewConversation: (state, action) => {
             state.allConversations.push(action.payload);
