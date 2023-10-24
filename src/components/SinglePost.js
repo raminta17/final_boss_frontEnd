@@ -26,7 +26,6 @@ const SinglePost = ({post}) => {
    async  function openModal() {
         setDisplay('block');
         dispatch(updateOpenPost(post));
-
        try {
            const res = await fetch('http://localhost:8000/getPostAuthor/' + post.authorId);
            const data = await res.json();

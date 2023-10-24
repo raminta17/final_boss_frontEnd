@@ -45,12 +45,16 @@ export const userSlice = createSlice({
             })
         },
         updateSingleUser: (state, action) => {
-            state.allUsers = state.allUsers.map(user => {
-                if (user.username !== action.payload.username) return user;
-                user.isOnline = action.payload.isOnline;
-                user.profileImg = action.payload.profileImg;
-                return user;
-            })
+            if(state.allUsers.find(user => user.username === action.payload.username)){
+                state.allUsers = state.allUsers.map(user => {
+                    if (user.username !== action.payload.username) return user;
+                    user.isOnline = action.payload.isOnline;
+                    user.profileImg = action.payload.profileImg;
+                    return user;
+                })
+            }else {
+                state.allUsers.push(action.payload);
+            }
             state.allUsers = state.allUsers.sort((user1,user2) => user2.isOnline - user1.isOnline);
         },
         addNewConversation: (state, action) => {

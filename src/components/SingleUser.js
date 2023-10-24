@@ -9,7 +9,6 @@ const SingleUser = ({user, hideMessageButton,selected, setSelected}) => {
     const [display, setDisplay] = useState('none');
     const loggedInUser = useSelector(state=>state.user.loggedInUser);
 
-
     function startConversation() {
         if(setSelected) setSelected(user.username);
         socket.emit('startConversation', user.conversationId);
@@ -20,7 +19,11 @@ const SingleUser = ({user, hideMessageButton,selected, setSelected}) => {
             <div className="navUserLogo justify-content-between">
                 <div className="d-flex align-items-center position-relative">
                     <img src={user.profileImg} alt=""/>
-                    <div className="position-absolute online" style={{backgroundColor: user.isOnline ? '#18a818' : 'lightgray', border: '2px solid white',width:'12px', height: '12px', borderRadius: '50%'}}></div>
+                    {'isOnline' in user &&
+                        <div className="position-absolute online"
+                             style={{backgroundColor: user.isOnline ? '#18a818' : 'lightgray',
+                                 border: '2px solid white',width:'12px', height: '12px', borderRadius: '50%'}}>
+                        </div>}
                     <b className="wordBreak">{user.username}</b>
                 </div>
 

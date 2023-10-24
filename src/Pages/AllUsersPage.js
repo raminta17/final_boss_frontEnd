@@ -23,9 +23,10 @@ const AllUsersPage = () => {
         <>
             <NavBar/>
             <div className="contentPage allUsersPage">
-                {allUsers.map(user =>
-                    <SingleUser key={user._id} user={user}/>
-                )}
+                {allUsers.length>0 ? allUsers.map(user =>
+                        <SingleUser key={user._id} user={user}/>
+                    ) :
+                    <div className="my-3 text-center">There are no other users</div>}
             </div>
         </>
     );

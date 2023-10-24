@@ -56,6 +56,7 @@ button, .createPostBtn, .selectedSort, .selectedSort i {
     background-color: var(--darkColor);
     color: var(--lightColor);
     border: 2px solid var(--darkColor);
+    transition: var(--transition);
 }
 
 input[type='checkbox'] {
@@ -596,6 +597,9 @@ display: flex;
     .conversations {
         flex-direction: row;
         overflow-x: auto;
+    }
+    .arrow {
+        transform: rotate(90deg);
     }
     .profileBox {
         flex-direction: column;

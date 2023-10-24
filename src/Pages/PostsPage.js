@@ -118,9 +118,10 @@ const PostsPage = () => {
                     </div>}
                 </div>
                 <div className=" usersSideBar">
-                    {allUsers.map(user =>
+                    {allUsers.length>0 ? allUsers.map(user =>
                         <SingleUser key={user._id} user={user}/>
-                    )}
+                    ) :
+                    <div className="my-3 text-center">There are no other users</div>}
                 </div>
                 <Message_newPost_Modal type={'post'} setDisplay={setDisplay} display={display}/>
             </div>

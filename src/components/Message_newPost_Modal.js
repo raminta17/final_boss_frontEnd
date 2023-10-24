@@ -49,7 +49,7 @@ const Message_newPost_Modal = ({type, user, setDisplay, display}) => {
                     <div className="text-center d-flex flex-column gap-4">
                         <div className="navUserLogo position-relative">
                             <img src={user.profileImg} alt=""/>
-                            <div className="position-absolute online" style={{backgroundColor: user.isOnline ? '#18a818' : 'lightgray', border: '2px solid white',width:'12px', height: '12px', borderRadius: '50%'}}></div>
+                            {'isOnline' in user && <div className="position-absolute online" style={{backgroundColor: user.isOnline ? '#18a818' : 'lightgray', border: '2px solid white',width:'12px', height: '12px', borderRadius: '50%'}}></div>}
 
                             <div> {user.username}</div>
                         </div>

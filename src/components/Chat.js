@@ -24,7 +24,7 @@ const Chat = () => {
                 )
                 :
                 <div className="h-100 d-flex align-items-center justify-content-center gap-2">
-                    <i className="fa-solid fa-arrow-left"></i>
+                    <i className="fa-solid fa-arrow-left arrow"></i>
                     Select a conversation</div>}
                 <div ref={chatRef}></div>
             </div>
