@@ -110,24 +110,20 @@ function App() {
             dispatch(updateAllPosts(allPosts));
         })
         socket.on('sendingAllUsers', data => {
-            console.log('sending all users', data)
             const currentLoggedInUser = loggedInUserRef.current;
             let allUsersExceptSelf = [];
             if(currentLoggedInUser) allUsersExceptSelf = data.filter(user => user._id !== currentLoggedInUser._id);
             dispatch(updateAllUsers(allUsersExceptSelf));
         })
         socket.on('sendingUserUpdate', user => {
-            console.log('sending user update', user)
             dispatch(updateSingleUser(user));
             dispatch(updateSingleConversationUserStatus(user));
         })
         socket.on('sendingConversations', conversations => {
-            console.log('sending all conversations',conversations)
             dispatch(updateAllConversations(conversations));
         })
         socket.on('sending new conversation', conversation => {
             dispatch(addNewConversation(conversation));
-            console.log('new conversation', conversation)
         })
         socket.on('new message in existing conversation', (conversationId, msg) => {
             const currentOpenConversation = openConversationRef.current;
