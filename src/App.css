@@ -16,7 +16,6 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--lightColor);
     color: var(--darkColor);
-    /*background: -webkit-linear-gradient(45deg, #3F72AF, var(--lightColor));*/
 }
 
 .f1 {
@@ -45,7 +44,7 @@ i {
     color: var(--greyColor)
 }
 
-input[type='text'],input[type='url'], input[type='password'], button {
+input[type='text'], input[type='url'], input[type='password'], textarea, button {
     border: 2px solid var(--lightColor);
     padding: 7px 30px;
     transition: var(--transition);
@@ -119,7 +118,6 @@ header h2 {
 }
 
 .navUserLogo {
-    /*width: 10vw;*/
     height: 100%;
     display: flex;
     align-items: center;
@@ -178,23 +176,24 @@ header h2 {
     gap: 10px;
     background-color: var(--lightColor);
 }
+
 .form {
     padding: 40px;
     gap: 20px;
     width: 80%;
     margin: auto;
 }
-.form input {
-    width: 100%;
-}
+
 .formSpan {
     font-style: italic;
     cursor: pointer;
     transition: var(--transition);
 }
+
 .formSpan:hover {
     text-decoration: underline;
 }
+
 .profilePage {
     display: flex;
     flex-wrap: wrap;
@@ -203,15 +202,18 @@ header h2 {
     align-items: start;
     padding: 100px 20px 20px 20px;
 }
+
 .profilePage .box {
     box-shadow: none;
 }
+
 .profileBox {
     flex-direction: row;
     justify-content: space-around;
     align-items: start;
     max-width: 60vw;
 }
+
 .profileImgDiv {
     max-width: 100%;
 }
@@ -221,20 +223,32 @@ header h2 {
     height: 100%;
     object-fit: contain;
 }
+
+.postTitle {
+    height: 50px;
+
+}
+
+.postImage img {
+    object-fit: cover;
+}
+
 .close {
-    top:-15px;
-    right:-15px;
+    top: -15px;
+    right: -15px;
     cursor: pointer;
     transition: var(--transition);
 }
+
 .close:hover {
     color: lightgrey;
 }
+
 .contentPage {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: start;
+    justify-content: center;
     align-items: start;
     padding: 100px 20px 20px 20px;
 }
@@ -268,12 +282,14 @@ header h2 {
     flex-wrap: wrap;
     padding: 10px;
 }
+
 .messagesPage .singleUser, .usersSideBar .singleUser {
     transition: var(--transition);
     box-shadow: none;
     padding: 5px;
 }
-.usersSideBar .singleUser{
+
+.usersSideBar .singleUser {
     margin: 5px;
 }
 
@@ -285,16 +301,16 @@ header h2 {
 .openPostCont .singleUser img {
     margin: 0 10px 10px 0;
 }
+
 .online {
     top: 50px;
-    left:45px;
+    left: 45px;
 }
-.openPostCont .singleUser .online
-,
-.openPostCont .messageModal .online
-{
+
+.openPostCont .singleUser .online,
+.openPostCont .messageModal .online {
     top: 40px;
-    left:35px;
+    left: 35px;
 }
 
 
@@ -342,6 +358,7 @@ header h2 {
 .messageModal .navUserLogo {
     height: auto;
 }
+
 .sortBtn > div, .createPostBtn {
     min-width: 150px;
     border: 1px solid grey;
@@ -354,6 +371,7 @@ header h2 {
     height: 50px;
     padding: 5px 5px;
 }
+
 .createPostBtn {
     min-width: 250px;
 }
@@ -369,10 +387,11 @@ header h2 {
     gap: 20px;
     justify-content: center;
 }
+
 .allUsersPage .singleUser {
-    /*flex:1;*/
-   width: 400px;
+    width: 400px;
 }
+
 .singlePost {
     max-width: 300px;
     cursor: pointer;
@@ -387,8 +406,8 @@ header h2 {
     display: flex;
 }
 
-.openPostCont .openPostInputDiv input {
-    width: 80%;
+.openPostCont .openPostInputDiv input, .form input, .inputs input {
+    width: 100%;
 }
 
 .openPostCont {
@@ -416,7 +435,7 @@ header h2 {
 }
 
 .postImage {
-    width: 250px;
+    width: 260px;
     height: 300px;
 }
 
@@ -426,8 +445,6 @@ header h2 {
 }
 
 .modalImage {
-    /*max-width: 400px;*/
-    /*max-height: 400px;*/
     max-width: 100%;
     max-height: 100%;
     width: auto;
@@ -457,21 +474,19 @@ header h2 {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /*background-color: white;*/
     padding: 20px;
     border-radius: 10px 10px 0 0;
 }
+
 .inputs {
-display: flex;
+    display: flex;
 }
 
-.inputs input {
-    width: 90%;
-}
 .messagesPage .singleUser {
     cursor: pointer;
     min-width: 120px;
 }
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 5px;
@@ -490,13 +505,15 @@ display: flex;
 ::-webkit-scrollbar-thumb:hover {
     background: var(--darkColor);
 }
+
 .conversations {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    height:80vh;
-    overflow:auto;
+    height: 80vh;
+    overflow: auto;
 }
+
 .messageBox {
     padding: 5px;
     margin: 5px;
@@ -517,12 +534,15 @@ display: flex;
 .message {
     word-break: break-all;
 }
-.hover i,.hover span {
+
+.hover i, .hover span {
     transition: var(--transition);
 }
+
 .hover:hover i, .hover:hover span {
     color: white;
 }
+
 .date {
     font-size: small;
     font-style: italic;
@@ -537,10 +557,12 @@ display: flex;
     .createPostBtn {
         width: 100%;
     }
+
     .sortCont div:nth-child(1) {
         margin: auto;
     }
 }
+
 @media (max-width: 768px) {
     .nav .navLinks, .usersSideBar {
         display: none;
@@ -583,21 +605,26 @@ display: flex;
     .profilePage {
         align-items: center;
     }
+
     .contentPage {
         padding: 20px;
         justify-content: center;
     }
+
     .messagesPage {
         flex-direction: column;
         margin: auto;
     }
+
     .conversations {
         flex-direction: row;
         overflow-x: auto;
     }
+
     .arrow {
         transform: rotate(90deg);
     }
+
     .profileBox {
         flex-direction: column;
         max-width: 100%;
@@ -618,15 +645,19 @@ display: flex;
         overflow: unset;
         height: auto;
     }
+
     .commentsLikes {
         flex-direction: column-reverse;
     }
+
     .commentsLikes h4 {
         margin-top: 0.5rem;
     }
+
     .postModal {
         padding-top: 0;
     }
+
     .postModal .modal-content {
         height: 100%;
         padding-bottom: 40px;

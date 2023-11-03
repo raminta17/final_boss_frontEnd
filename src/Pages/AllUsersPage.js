@@ -10,10 +10,10 @@ const AllUsersPage = () => {
 
     const nav = useNavigate();
     const dispatch = useDispatch();
-    const allUsers = useSelector(state=>state.user.allUsers);
+    const allUsers = useSelector(state => state.user.allUsers);
 
     useEffect(() => {
-        if(!localStorage.getItem('TOKEN')) {
+        if (!localStorage.getItem('TOKEN')) {
             dispatch(updateLoggedInUser());
             nav('/');
         }
@@ -23,7 +23,7 @@ const AllUsersPage = () => {
         <>
             <NavBar/>
             <div className="contentPage allUsersPage">
-                {allUsers.length>0 ? allUsers.map(user =>
+                {allUsers.length > 0 ? allUsers.map(user =>
                         <SingleUser key={user._id} user={user}/>
                     ) :
                     <div className="my-3 text-center">There are no other users</div>}

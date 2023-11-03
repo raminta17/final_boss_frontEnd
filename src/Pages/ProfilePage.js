@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateLoggedInUser, updateImg} from "../features/user";
 import {socket} from "../App";
 import button from "bootstrap/js/src/button";
+
 const ProfilePage = () => {
 
     const imgRef = useRef();
@@ -28,7 +29,7 @@ const ProfilePage = () => {
 
     async function updateProfileImg(e) {
         e.preventDefault();
-        if(!imgRef.current.value) return setError('Note: you have to provide new photo url.')
+        if (!imgRef.current.value) return setError('Note: you have to provide new photo url.')
         socket.emit('updatePhoto', imgRef.current.value);
         dispatch(updateImg(imgRef.current.value));
         imgRef.current.value = "";
@@ -90,10 +91,13 @@ const ProfilePage = () => {
                                 {displayPhoto === 'none' ?
                                     <button onClick={() => setDisplayPhoto('flex')}>Change photo</button>
                                     :
-                                    <form onSubmit={updateProfileImg} style={{display: displayPhoto}} className="flex-column gap-2">
+                                    <form onSubmit={updateProfileImg} style={{display: displayPhoto}}
+                                          className="flex-column gap-2">
                                         <div className="w-100 position-relative">
-                                            <input className="w-100" type="url" ref={imgRef} placeholder="Your new profile picture url"/>
-                                            <i onClick={() => setDisplayPhoto('none')} className="fa-regular fa-circle-xmark position-absolute close"></i>
+                                            <input className="w-100" type="url" ref={imgRef}
+                                                   placeholder="Your new profile picture url"/>
+                                            <i onClick={() => setDisplayPhoto('none')}
+                                               className="fa-regular fa-circle-xmark position-absolute close"></i>
                                         </div>
                                         <button>Update photo</button>
                                     </form>}
@@ -101,10 +105,13 @@ const ProfilePage = () => {
                             {displayPass === 'none' ?
                                 <button onClick={() => setDisplayPass('flex')}>Change Password</button>
                                 :
-                                <form onSubmit={changePassword} style={{display: displayPass}} className="flex-column gap-2">
+                                <form onSubmit={changePassword} style={{display: displayPass}}
+                                      className="flex-column gap-2">
                                     <div className="w-100 position-relative">
-                                        <input className="w-100" type="password" ref={oldPassRef} placeholder="old password"/>
-                                        <i onClick={() => setDisplayPass('none')} className="fa-regular fa-circle-xmark position-absolute close"></i>
+                                        <input className="w-100" type="password" ref={oldPassRef}
+                                               placeholder="old password"/>
+                                        <i onClick={() => setDisplayPass('none')}
+                                           className="fa-regular fa-circle-xmark position-absolute close"></i>
                                     </div>
                                     <input type="password" ref={newPassRef} placeholder="new password"/>
                                     <input type="password" ref={repeatNewPassRef} placeholder="repeat new password"/>
@@ -115,7 +122,6 @@ const ProfilePage = () => {
                     </div>
                 </div>
             }
-
         </>
 
     );

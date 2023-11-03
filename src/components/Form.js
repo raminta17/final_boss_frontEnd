@@ -102,11 +102,11 @@ const Form = () => {
             <form className="box form" onSubmit={page === 'Register' ? register : login}>
                 <h1>{page}</h1>
                 <div className="error">{error}</div>
-                <input type="text" ref={usernameRef} defaultValue="User" placeholder="Your username"/>
-                <input type="password" ref={passRef} defaultValue="Labas" placeholder="Your password"/>
+                <input type="text" ref={usernameRef} placeholder="Your username"/>
+                <input type="password" ref={passRef} placeholder="Your password"/>
                 {page === 'Register' &&
                     <>
-                        <input type="password" ref={repeatPassRef} defaultValue="Labas" placeholder="Repeat password"/>
+                        <input type="password" ref={repeatPassRef} placeholder="Repeat password"/>
                     </>
                 }
                 {page === 'Login' ?

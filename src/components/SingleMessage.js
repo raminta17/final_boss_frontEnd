@@ -7,7 +7,11 @@ const SingleMessage = ({message}) => {
 
     return (
         <div className="messageBox"
-             style={loggedInUser.username === message.username ? {alignSelf: 'end', backgroundColor:'#393E46', color: '#EEEEEE'} : {alignSelf: 'start', backgroundColor:'#EEEEEE'}}
+             style={loggedInUser.username === message.username ? {
+                 alignSelf: 'end',
+                 backgroundColor: '#393E46',
+                 color: '#EEEEEE'
+             } : {alignSelf: 'start', backgroundColor: '#EEEEEE'}}
         >
             <div className="d-flex flex-column">
                 <b>{loggedInUser.username === message.username ? 'You' : message.username} </b>

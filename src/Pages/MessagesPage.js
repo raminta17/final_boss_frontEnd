@@ -14,7 +14,7 @@ const MessagesPage = () => {
     const loggedInUser = useSelector(state => state.user.loggedInUser);
     const allConversations = useSelector(state => state.user.allConversations);
     const conversation = useSelector(state => state.user.openConversation);
-    const [selected, setSelected] =useState(null);
+    const [selected, setSelected] = useState(null);
     const [error, setError] = useState();
 
     useEffect(() => {
@@ -22,9 +22,8 @@ const MessagesPage = () => {
             dispatch(updateLoggedInUser());
             nav('/');
         }
-        if(conversation) setSelected(conversation.users.find(user => user !== loggedInUser.username))
+        if (conversation) setSelected(conversation.users.find(user => user !== loggedInUser.username))
     }, []);
-
 
     function sendMsg(e) {
         e.preventDefault();
@@ -40,21 +39,21 @@ const MessagesPage = () => {
             <div className="contentPage messagesPage">
                 <div className="conversations f1 w-100 gap-1">
                     {loggedInUser && allConversations.length > 0 ? allConversations.map(conversation =>
-                        <SingleUser
-                            key={conversation.conversationId}
-                            user={conversation}
-                            hideMessageButton={true}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                    ):
-                    <div>No conversations available.</div>}
+                            <SingleUser
+                                key={conversation.conversationId}
+                                user={conversation}
+                                hideMessageButton={true}
+                                selected={selected}
+                                setSelected={setSelected}
+                            />
+                        ) :
+                        <div>No conversations available.</div>}
                 </div>
                 <div className="f3 w-100">
                     <div className="chat">
-                    <Chat />
-                        {selected &&  <form className="inputs" onSubmit={sendMsg}>
-                            <input type="text" ref={messageRef} placeholder="Your message..." />
+                        <Chat/>
+                        {selected && <form className="inputs" onSubmit={sendMsg}>
+                            <input type="text" ref={messageRef} placeholder="Your message..."/>
                             <button type={"submit"}>SEND</button>
                         </form>
                         }

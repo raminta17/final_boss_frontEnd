@@ -7,7 +7,7 @@ import SingleMessage from "./SingleMessage";
 const SinglePostModal = ({author, setDisplay, display, time}) => {
 
     const loggedInUser = useSelector(state => state.user.loggedInUser);
-    const post = useSelector(state=>state.user.openPost);
+    const post = useSelector(state => state.user.openPost);
     const commentRef = useRef();
     const commentsDivRef = useRef();
     const [error, setError] = useState();
@@ -24,12 +24,14 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
         setDisplay('none');
         setError();
     }
+
     function handlePostLike() {
         socket.emit('handleLike', post._id, loggedInUser._id);
     }
+
     function handleComments(e) {
         e.preventDefault();
-        if(!commentRef.current.value) return setError('Note: comment cannot be empty.')
+        if (!commentRef.current.value) return setError('Note: comment cannot be empty.')
         socket.emit('sendComment', commentRef.current.value, post._id, loggedInUser._id);
         commentRef.current.value = '';
         setError();
@@ -51,35 +53,31 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                         <div className="f1">
                             {author && <SingleUser user={author}/>}
                             <div className="date">{time}</div>
-                            <h2>
-                                {post.title}
-                            </h2>
+                            <h2>{post.title}</h2>
                             <div className="d-flex gap-3 align-items-center">
                                 <div className="d-flex justify-content-between w-100 commentsLikes">
                                     <h4>Comments</h4>
                                     <div className="d-flex gap-4">
-                                        <div className="d-flex align-items-center gap-2" onClick={handlePostLike} style={{cursor: 'pointer'}}>
+                                        <div className="d-flex align-items-center gap-2" onClick={handlePostLike}
+                                             style={{cursor: 'pointer'}}>
                                             {!post.likes.includes(loggedInUser._id) ?
-                                                <div className="hover" >
+                                                <div className="hover">
                                                     <span>Like</span> <i className="fa-solid fa-thumbs-up"></i>
                                                 </div>
                                                 :
-                                                <div className="hover" >
+                                                <div className="hover">
                                                     <span>Unlike</span> <i className="fa-solid fa-thumbs-down"></i>
                                                 </div>
-                                                 }
-                                            <b>
-                                                {post.likes.length}
-                                            </b>
+                                            }
+                                            <b>{post.likes.length}</b>
                                         </div>
-                                        <div  className="d-flex align-items-center gap-2">
+                                        <div className="d-flex align-items-center gap-2">
                                             <i className="fa-solid fa-comment"></i>
                                             <b>{post.comments.length}</b>
                                         </div>
                                     </div>
 
                                 </div>
-
                             </div>
                             <div className="position-relative">
                                 <div className="commentsDiv mt-2">{
@@ -88,12 +86,11 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                                         :
                                         <div>
                                             {post.comments.map((comment, index) =>
-                                            <SingleMessage key={index} message={comment}/>
+                                                <SingleMessage key={index} message={comment}/>
                                             )}
                                             <div ref={commentsDivRef}></div>
                                         </div>
-
-                                            }
+                                }
                                 </div>
                                 <form onSubmit={handleComments} className="openPostInputDiv">
                                     <input type="text" ref={commentRef} placeholder="your comment..."/>
@@ -106,8 +103,7 @@ const SinglePostModal = ({author, setDisplay, display, time}) => {
                 </div>
             }
         </div>
-
-);
+    );
 };
 
 export default SinglePostModal;

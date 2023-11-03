@@ -6,8 +6,8 @@ import {useState} from "react";
 
 const NavBar = () => {
 
-    const nav= useNavigate();
-    const loggedInUser = useSelector(state=> state.user.loggedInUser);
+    const nav = useNavigate();
+    const loggedInUser = useSelector(state => state.user.loggedInUser);
     const [navClassNames, setNavClassNames] = useState('nav');
 
     function handleLogOut() {
@@ -16,6 +16,7 @@ const NavBar = () => {
         socket.disconnect();
         nav('/');
     }
+
     function handleResponsiveMenu() {
         if (navClassNames === 'nav') {
             setNavClassNames('nav responsive');
@@ -37,9 +38,15 @@ const NavBar = () => {
                     </div>
                 </div>}
             <div className="navLinksDiv h-100">
-                <NavLink className="navLinks" to="/posts"><div>POSTS</div></NavLink>
-                <NavLink className="navLinks" to="/messages"><div>MESSAGES</div></NavLink>
-                <NavLink className="navLinks allUsers" to="/allUsers"><div>USERS</div></NavLink>
+                <NavLink className="navLinks" to="/posts">
+                    <div>POSTS</div>
+                </NavLink>
+                <NavLink className="navLinks" to="/messages">
+                    <div>MESSAGES</div>
+                </NavLink>
+                <NavLink className="navLinks allUsers" to="/allUsers">
+                    <div>USERS</div>
+                </NavLink>
             </div>
             <div className="navLinks" onClick={handleLogOut}>LOG OUT</div>
         </div>
