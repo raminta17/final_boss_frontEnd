@@ -68,6 +68,7 @@ const ProfilePage = () => {
                 setError();
                 nav('/');
                 localStorage.removeItem('TOKEN');
+                socket.disconnect();
             }
         } catch (e) {
             console.log('error fetching front end', e)
