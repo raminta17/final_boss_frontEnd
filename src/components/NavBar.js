@@ -42,8 +42,6 @@ const NavBar = () => {
                 <NavLink className="navLinks allUsers" to="/allUsers"><div>USERS</div></NavLink>
             </div>
             <div className="navLinks" onClick={handleLogOut}>LOG OUT</div>
-
-
         </div>
     )
         ;
