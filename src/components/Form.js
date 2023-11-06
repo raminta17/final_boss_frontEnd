@@ -116,11 +116,21 @@ const Form = () => {
                             <input onChange={handleAutoSave} id="auto" type="checkbox" ref={autoSaveRef}/>
                         </div>
                         <div>Do not have an account? <span className="formSpan"
-                                                           onClick={() => setPage('Register')}>Register</span></div>
+                                                           onClick={() => {
+                                                               setPage('Register');
+                                                               setError();
+                                                               usernameRef.current.value = '';
+                                                               passRef.current.value = '';
+                                                           }}>Register</span></div>
                     </>
                     :
                     <div>Already have an account? <span className="formSpan"
-                                                        onClick={() => setPage('Login')}>Login</span></div>
+                                                        onClick={() => {
+                                                            setPage('Login');
+                                                            setError();
+                                                            usernameRef.current.value = '';
+                                                            passRef.current.value = '';
+                                                        }}>Login</span></div>
                 }
                 <button>{page}</button>
             </form>
