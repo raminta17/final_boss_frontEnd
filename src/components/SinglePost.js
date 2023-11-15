@@ -30,7 +30,7 @@ const SinglePost = ({post}) => {
         setDisplay('block');
         dispatch(updateOpenPost(post));
         try {
-            const res = await fetch('https://final-boss-back-end.vercel.app/getPostAuthor/' + post.authorId);
+            const res = await fetch('http://final-boss-back-end.vercel.app/getPostAuthor/' + post.authorId);
             const data = await res.json();
             setAuthor(data.data);
         } catch (e) {
