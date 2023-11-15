@@ -20,7 +20,7 @@ import {
     addNewMessage, updateAllConversations, updateSingleConversationUserStatus, updateSingleUser
 } from "./features/user";
 
-export const socket = io('http://localhost:8000', {
+export const socket = io('https://final-boss-back-end.vercel.app', {
     autoConnect: false
 });
 
@@ -63,7 +63,7 @@ function App() {
                     authorization: localStorage.getItem('TOKEN')
                 }
             }
-            fetch('http://localhost:8000/getUserInfo', options)
+            fetch('http://final-boss-back-end.vercel.app/getUserInfo', options)
                 .then(res => res.json()).then(data => {
                 dispatch(updateLoggedInUser(data.data))
             })
