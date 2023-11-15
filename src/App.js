@@ -63,7 +63,7 @@ function App() {
                     authorization: localStorage.getItem('TOKEN')
                 }
             }
-            fetch('http://final-boss-back-end.vercel.app/getUserInfo', options)
+            fetch('https://final-boss-back-end.vercel.app/getUserInfo', options)
                 .then(res => res.json()).then(data => {
                 dispatch(updateLoggedInUser(data.data))
             })
