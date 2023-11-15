@@ -40,7 +40,7 @@ const Form = () => {
         }
 
         try {
-            const res = await fetch('https://final-boss-back-end.vercel.app/register', options);
+            const res = await fetch('http://localhost:8000/register', options);
             const data = await res.json();
             setError(data.message);
             if (!data.error) {
@@ -73,7 +73,7 @@ const Form = () => {
             body: JSON.stringify(user)
         }
         try {
-            const res = await fetch('https://final-boss-back-end.vercel.app/login', options);
+            const res = await fetch('http://localhost:8000/login', options);
             const data = await res.json();
             setError(data.message);
             if (!data.error) {

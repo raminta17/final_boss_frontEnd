@@ -57,7 +57,7 @@ const ProfilePage = () => {
             body: JSON.stringify(passChangeObj)
         }
         try {
-            const res = await fetch('http://final-boss-back-end.vercel.app/changePassword', options);
+            const res = await fetch('http://localhost:8000/changePassword', options);
             const data = await res.json();
             setError(data.message);
             if (!data.error) {

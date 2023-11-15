@@ -20,7 +20,7 @@ const PostsPage = () => {
             dispatch(updateLoggedInUser());
             nav('/');
         }
-        fetch('https://final-boss-back-end.vercel.app/getAllPosts')
+        fetch('http://localhost:8000/getAllPosts')
             .then(res => res.json()).then(data => {
             dispatch(updateAllPosts(data.data));
         })
